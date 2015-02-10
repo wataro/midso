@@ -19,4 +19,7 @@ Midso is pronouced "miso": the Japanese soybean paste.
 
 ## Requirements
 
-Under construction.
+- POCO C++ libraries >= 1.6.0
+- HDF5 >= 1.8.11
+- clang >= 3.5
+
