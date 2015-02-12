@@ -1,37 +1,63 @@
+/**
+    Copyright 2015- <Taro WATASUE>
+*/
+#ifndef INCLUDE_MIDSO_TENSOR_H_
+#define INCLUDE_MIDSO_TENSOR_H_
+
 namespace midso {
 
-class TensorType
-{
-public:
+class Tensor {
+ public:
+    Tensor(
+        const Size & d0 = 1,
+        const Size & d1 = 1,
+        const Size & d2 = 1,
+        const Size & d3 = 1,
+        const Size & d4 = 1,
+        const Size & d5 = 1,
+        const Size & d6 = 1,
+        const Size & d7 = 1);
 
-    TensorType(
-        const SizeType & d0 = 1,
-        const SizeType & d1 = 1,
-        const SizeType & d2 = 1,
-        const SizeType & d3 = 1,
-        const SizeType & d4 = 1,
-        const SizeType & d5 = 1,
-        const SizeType & d6 = 1,
-        const SizeType & d7 = 1,
-    );
-
-    const SizeType n_dimensions(void) const
-    {
+    const Size n_dimensions(void) const {
         return this->dimensions_.size();
     }
 
-    const SizeVectorType & dimensions(void) const
-    {
+    const SizeVector & dimensions(void) const {
         return this->dimensions_;
     }
-    
-private:
 
-    SizeVectorType dimensions_; 
-    FloatVectorType values_
-    CudaMemoryType * cuda_values_;
+    const Float & operator[](
+        const Int & i0 = 0,
+        const Int & i1 = 0,
+        const Int & i2 = 0,
+        const Int & i3 = 0,
+        const Int & i4 = 0,
+        const Int & i5 = 0,
+        const Int & i6 = 0,
+        const Int & i7 = 0) {
+        const Int index =
+            i0 * this->strides_[0] +
+            i1 * this->strides_[1] +
+            i2 * this->strides_[2] +
+            i3 * this->strides_[3] +
+            i4 * this->strides_[4] +
+            i5 * this->strides_[5] +
+            i6 * this->strides_[6] +
+            i7;
+        MIDSO_ASSERT(index < this->values_.size());
+        return this->values_[index];
+    }
 
+ private:
+    SizeVector dimensions_;
+    SizeVector strides_;
+    FloatVector values_;
+    CudaMemory * cuda_values_;
+
+    DISALLOW_COPY_AND_ASSIGN(Tensor);
 };
 
-} // namespace
+}  // namespace midso
+
+#endif  // INCLUDE_MIDSO_TENSOR_H_
 
