@@ -30,7 +30,7 @@ ARG_WITH_DEFAULT_FORMATTER = '{type} {name} = {default}'
 
 MEMBER_FORMATTER = '{args};'
 DECLARE_FUNC_FORMATTER = '    {rettype} {name}({args});'
-DEFINE_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}){\n}'
+DEFINE_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}){{\n}}'
 
 HEADER_FORMATTER = '''/**
     Copyright (c) 2015 <Taro WATASUE>
@@ -116,9 +116,9 @@ def get_source_contents(yaml_path):
     classname = get_class(yaml_path)
     define_list = []
     for func_dict in yaml.load(open(args.yaml_path)):
-        define = get_function_define(func_dict)
+        define = get_function_define(func_dict, classname)
         define_list.append(define)
-    defines = ' '.join(define_list)
+    defines = '\n\n'.join(define_list)
     return SOURCE_FORMATTER.format(**locals())
 
 
