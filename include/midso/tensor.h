@@ -8,6 +8,10 @@ namespace midso {
 
 class Tensor {
  public:
+    enum class CONST {
+        MAX_N_DIMENSIONS = 8,
+        MAX_N_STRIDES = MAX_N_DIMENSIONS - 1,
+    };
     Tensor(
         const Size & d0 = 1,
         const Size & d1 = 1,
@@ -49,10 +53,10 @@ class Tensor {
     }
 
  private:
-    SizeVector dimensions_;
-    SizeVector strides_;
-    FloatVector values_;
-    CudaMemory * cuda_values_;
+    Array<Size, MAX_N_DIMENSIONS>   dimensions_;
+    Array<Size, MAX_N_STRIDES>      strides_;
+    FloatVector                     values_;
+    CudaMemory *                    cuda_values_;
 
     DISALLOW_COPY_AND_ASSIGN(Tensor);
 };
