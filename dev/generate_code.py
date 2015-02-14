@@ -30,8 +30,8 @@ ARG_WITH_DEFAULT_FORMATTER = '{type} {name} = {default}'
 
 MEMBER_FORMATTER = '{args};'
 DECLARE_FUNC_FORMATTER = '    {rettype} {name}({args});'
-DEFINE_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}){{\n}}'
-TEST_FUNC_FORMATTER = 'TEST({classname}, {name}){{\n}}'
+DEFINE_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}) {{\n}}'
+TEST_FUNC_FORMATTER = 'TEST({classname}, {name}) {{\n}}'
 
 HEADER_FORMATTER = '''/**
     Copyright (c) 2015 <Taro WATASUE>
@@ -67,7 +67,7 @@ SOURCE_FORMATTER = '''/**
 
     http://opensource.org/licenses/mit-license.php
 */
-#include "{basename}.h"
+#include "midso/{basename}.h"
 
 {defines}
 '''
@@ -80,14 +80,14 @@ TEST_FORMATTER = '''/**
     http://opensource.org/licenses/mit-license.php
 */
 #include <gtest/gtest.h>
-#include "{basename}.h"
+#include "midso/{basename}.h"
 
 {tests}
 '''
 
 def get_function_declare(func_dict):
     key = func_dict.keys()[0]
-    rettype = func_dict[key]['return']
+    rettype = func_dict[key].get('return', 'void')
     assert '()' == key[-2:]
     name = key[:-2]
     arg_list = []
@@ -114,7 +114,7 @@ def get_header_contents(yaml_path):
 
 def get_function_define(func_dict, classname):
     key = func_dict.keys()[0]
-    rettype = func_dict[key]['return']
+    rettype = func_dict[key].get('return', 'void')
     assert '()' == key[-2:]
     name = key[:-2]
     arg_list = []
@@ -138,7 +138,7 @@ def get_source_contents(yaml_path):
 
 def get_function_test(func_dict, classname):
     key = func_dict.keys()[0]
-    rettype = func_dict[key]['return']
+    rettype = func_dict[key].get('return', 'void')
     assert '()' == key[-2:]
     name = key[:-2]
     return TEST_FUNC_FORMATTER.format(**locals())
@@ -155,6 +155,33 @@ def get_test_contents(yaml_path):
     return TEST_FORMATTER.format(**locals())
 
 
+def save_header_file(yaml_path):
+    basename = get_basename(yaml_path)
+    contents = get_header_contents(yaml_path)
+    file_path = path.join('include', 'midso', '{}.h'.format(basename))
+    with open(file_path, 'w') as f:
+        f.write(contents)
+        print 'saved: {}'.format(file_path)
+
+
+def save_source_file(yaml_path):
+    basename = get_basename(yaml_path)
+    contents = get_source_contents(yaml_path)
+    file_path = path.join('src', 'midso', '{}.cpp'.format(basename))
+    with open(file_path, 'w') as f:
+        f.write(contents)
+        print 'saved: {}'.format(file_path)
+
+
+def save_test_file(yaml_path):
+    basename = get_basename(yaml_path)
+    contents = get_test_contents(yaml_path)
+    file_path = path.join('test', 'midso', '{}.cpp'.format(basename))
+    with open(file_path, 'w') as f:
+        f.write(contents)
+        print 'saved: {}'.format(file_path)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('yaml_path')
@@ -164,3 +191,6 @@ if __name__ == '__main__':
     print get_source_contents(args.yaml_path)
     print get_test_contents(args.yaml_path)
 
+    save_header_file(args.yaml_path)
+    save_source_file(args.yaml_path)
+    save_test_file(args.yaml_path)
