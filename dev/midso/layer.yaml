@@ -1,0 +1,12 @@
+%YAML 1.1
+---
+- forward():
+    args:
+    - {type: 'const Tensor &', name: in_tensor}
+- backward():
+    args:
+    - {type: 'const Tensor &', name: out_diff_tensor}
+- out_tensor():
+    return: 'const Tensor &'
+- in_diff_tensor():
+    return: 'const Tensor &'
