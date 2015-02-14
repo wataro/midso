@@ -3,11 +3,16 @@ import yaml
 from os import path
 from pprint import pprint
 
-def get_class(yaml_path):
+def get_basename(yaml_path):
     rest, basename = path.split(yaml_path)
-    basename = path.splitext(basename)[0]
+    return path.splitext(basename)[0]
+
+
+def get_class(yaml_path):
+    basename = get_basename(yaml_path)
     words = basename.split('_')
     return ''.join(w.title() for w in words)
+
 
 def get_include_guard(yaml_path):
     rest, basename = path.split(yaml_path)
@@ -54,6 +59,18 @@ class {classname} {{
 #endif  // {include_guard}
 '''
 
+SOURCE_FORMATTER = '''/**
+    Copyright (c) 2015 <Taro WATASUE>
+    
+    This software is released under the MIT License.
+
+    http://opensource.org/licenses/mit-license.php
+*/
+#include "{basename}.h"
+
+{defines}
+'''
+
 def get_function_declare(func_dict):
     key = func_dict.keys()[0]
     rettype = func_dict[key]['return']
@@ -81,11 +98,35 @@ def get_header_contents(yaml_path):
     return HEADER_FORMATTER.format(**locals())
 
 
+def get_function_define(func_dict, classname):
+    key = func_dict.keys()[0]
+    rettype = func_dict[key]['return']
+    assert '()' == key[-2:]
+    name = key[:-2]
+    arg_list = []
+    for arg_dict in func_dict[key].get('args', []):
+        arg = ARG_FORMATTER.format(**arg_dict)
+        arg_list.append(arg)
+    args = '\n        '.join(arg_list)
+    return DEFINE_FUNC_FORMATTER.format(**locals())
+
+
+def get_source_contents(yaml_path):
+    basename = get_basename(yaml_path)
+    classname = get_class(yaml_path)
+    define_list = []
+    for func_dict in yaml.load(open(args.yaml_path)):
+        define = get_function_define(func_dict)
+        define_list.append(define)
+    defines = ' '.join(define_list)
+    return SOURCE_FORMATTER.format(**locals())
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('yaml_path')
     args = parser.parse_args()
 
     print get_header_contents(args.yaml_path)
-
+    print get_source_contents(args.yaml_path)
 
