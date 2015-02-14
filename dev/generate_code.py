@@ -31,6 +31,7 @@ ARG_WITH_DEFAULT_FORMATTER = '{type} {name} = {default}'
 MEMBER_FORMATTER = '{args};'
 DECLARE_FUNC_FORMATTER = '    {rettype} {name}({args});'
 DEFINE_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}){{\n}}'
+TEST_FUNC_FORMATTER = 'TEST({classname}, {name}){{\n}}'
 
 HEADER_FORMATTER = '''/**
     Copyright (c) 2015 <Taro WATASUE>
@@ -69,6 +70,19 @@ SOURCE_FORMATTER = '''/**
 #include "{basename}.h"
 
 {defines}
+'''
+
+TEST_FORMATTER = '''/**
+    Copyright (c) 2015 <Taro WATASUE>
+    
+    This software is released under the MIT License.
+
+    http://opensource.org/licenses/mit-license.php
+*/
+#include <gtest/gtest.h>
+#include "{basename}.h"
+
+{tests}
 '''
 
 def get_function_declare(func_dict):
@@ -122,6 +136,25 @@ def get_source_contents(yaml_path):
     return SOURCE_FORMATTER.format(**locals())
 
 
+def get_function_test(func_dict, classname):
+    key = func_dict.keys()[0]
+    rettype = func_dict[key]['return']
+    assert '()' == key[-2:]
+    name = key[:-2]
+    return TEST_FUNC_FORMATTER.format(**locals())
+
+
+def get_test_contents(yaml_path):
+    basename = get_basename(yaml_path)
+    classname = get_class(yaml_path)
+    test_list = []
+    for func_dict in yaml.load(open(args.yaml_path)):
+        test = get_function_test(func_dict, classname)
+        test_list.append(test)
+    tests = '\n\n'.join(test_list)
+    return TEST_FORMATTER.format(**locals())
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('yaml_path')
@@ -129,4 +162,5 @@ if __name__ == '__main__':
 
     print get_header_contents(args.yaml_path)
     print get_source_contents(args.yaml_path)
+    print get_test_contents(args.yaml_path)
 
