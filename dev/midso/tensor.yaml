@@ -23,7 +23,11 @@
         - {type: 'const Size &', name: index6, default: 0}
         - {type: 'const Size &', name: index7, default: 0}
 - ptr():
-    return: 'const Float *'
+    return: 'const SharedPointer<Float>'
 - ptr():
-    return: 'Float *'
+    return: 'SharedPointer<Float>'
+- shallow_copy():
+    return: 'Tensor'
+- deep_copy():
+    return: 'Tensor'
 
