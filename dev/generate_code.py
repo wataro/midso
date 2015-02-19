@@ -147,17 +147,23 @@ def get_args(func_dict, with_default=False):
 
 def is_interface(yaml_path):
     classname = get_class(args.yaml_path)
-    return 'Interface' == classname[-len('Interface'):]
+    return classname.endswith('Interface')
+
 
 def is_const_method(func_dict):
     if isinstance(func_dict, str):
         return False
     else:
         key = func_dict.keys()[0]
+        rettype = get_rettype(func_dict)
         if 'args' in func_dict[key]:
-            return 'const' in func_dict[key]['args']
-        else:
             return False
+        elif not rettype.startswith('const'):
+            return False
+        elif not rettype.endswith('&'):
+            return False
+        else:
+            return True
 
 
 def get_function_declare(func_dict, formatter):

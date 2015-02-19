@@ -4,6 +4,5 @@
     args:
     - {type: 'const Tensor &', name: input_node}
 - output_node():
-    const: method
     return: 'const Tensor &'
 
