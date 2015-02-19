@@ -3,27 +3,6 @@ import yaml
 from os import path
 from pprint import pprint
 
-def get_basename(yaml_path):
-    rest, basename = path.split(yaml_path)
-    return path.splitext(basename)[0]
-
-
-def get_class(yaml_path):
-    basename = get_basename(yaml_path)
-    words = basename.split('_')
-    return ''.join(w.title() for w in words)
-
-
-def get_include_guard(yaml_path):
-    rest, basename = path.split(yaml_path)
-    rest, dirname1 = path.split(rest)
-    basename = path.splitext(basename)[0].upper()
-    if 'midso' == dirname1:
-        return 'INCLUDE_MIDSO_{}_H_'.format(basename)
-    else:
-        assert 'midso' == path.basename(rest), rest
-        return 'INCLUDE_MIDSO_{}_{}_H_'.format(dirname1, basename)
-
 
 ARG_FORMATTER = '{type} {name}'
 ARG_WITH_DEFAULT_FORMATTER = '{type} {name} = {default}'
@@ -53,8 +32,6 @@ class {classname} {{
 
  private:
     DISALLOW_COPY_AND_ASIGN({classname});
-
-{declares}
 }};
 
 #endif  // {include_guard}
@@ -85,19 +62,69 @@ TEST_FORMATTER = '''/**
 {tests}
 '''
 
+def get_basename(yaml_path):
+    rest, basename = path.split(yaml_path)
+    return path.splitext(basename)[0]
+
+
+def get_class(yaml_path):
+    basename = get_basename(yaml_path)
+    words = basename.split('_')
+    return ''.join(w.title() for w in words)
+
+
+def get_include_guard(yaml_path):
+    rest, basename = path.split(yaml_path)
+    rest, dirname1 = path.split(rest)
+    basename = path.splitext(basename)[0].upper()
+    if 'midso' == dirname1:
+        return 'INCLUDE_MIDSO_{}_H_'.format(basename)
+    else:
+        assert 'midso' == path.basename(rest), rest
+        return 'INCLUDE_MIDSO_{}_{}_H_'.format(dirname1, basename)
+
+
+def get_name(func_dict):
+    if isinstance(func_dict, str):
+        assert '()' == func_dict[-2:]
+        return func_dict[:-2]
+    else:
+        key = func_dict.keys()[0]
+        assert '()' == key[-2:]
+        return key[:-2]
+    
+
+def get_rettype(func_dict):
+    if isinstance(func_dict, str):
+        return 'void'
+    else:
+        key = func_dict.keys()[0]
+        return func_dict[key].get('return', 'void')
+
+
+def get_args(func_dict, with_default=False):
+    if isinstance(func_dict, str):
+        return ''
+    else:
+        key = func_dict.keys()[0]
+        assert '()' == key[-2:]
+        name = key[:-2]
+        arg_list = []
+        for arg_dict in func_dict[key].get('args', []):
+            if with_default and 'default' in arg_dict:
+                arg = ARG_WITH_DEFAULT_FORMATTER.format(**arg_dict)
+            else:
+                arg = ARG_FORMATTER.format(**arg_dict)
+            arg_list.append(arg)
+        args = '\n        '.join(arg_list)
+    return args
+
+
+
 def get_function_declare(func_dict):
-    key = func_dict.keys()[0]
-    rettype = func_dict[key].get('return', 'void')
-    assert '()' == key[-2:]
-    name = key[:-2]
-    arg_list = []
-    for arg_dict in func_dict[key].get('args', []):
-        if 'default' in arg_dict:
-            arg = ARG_WITH_DEFAULT_FORMATTER.format(**arg_dict)
-        else:
-            arg = ARG_FORMATTER.format(**arg_dict)
-        arg_list.append(arg)
-    args = '\n        '.join(arg_list)
+    rettype = get_rettype(func_dict)
+    name = get_name(func_dict)
+    args = get_args(func_dict, with_default=True)
     return DECLARE_FUNC_FORMATTER.format(**locals())
 
 
@@ -113,15 +140,9 @@ def get_header_contents(yaml_path):
 
 
 def get_function_define(func_dict, classname):
-    key = func_dict.keys()[0]
-    rettype = func_dict[key].get('return', 'void')
-    assert '()' == key[-2:]
-    name = key[:-2]
-    arg_list = []
-    for arg_dict in func_dict[key].get('args', []):
-        arg = ARG_FORMATTER.format(**arg_dict)
-        arg_list.append(arg)
-    args = '\n        '.join(arg_list)
+    rettype = get_rettype(func_dict)
+    name = get_name(func_dict)
+    args = get_args(func_dict)
     return DEFINE_FUNC_FORMATTER.format(**locals())
 
 
@@ -137,10 +158,8 @@ def get_source_contents(yaml_path):
 
 
 def get_function_test(func_dict, classname):
-    key = func_dict.keys()[0]
-    rettype = func_dict[key].get('return', 'void')
-    assert '()' == key[-2:]
-    name = key[:-2]
+    rettype = get_rettype(func_dict)
+    name = get_name(func_dict)
     return TEST_FUNC_FORMATTER.format(**locals())
 
 
