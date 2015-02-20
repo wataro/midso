@@ -27,7 +27,7 @@ HEADER_FORMATTER = '''/**
 #ifndef {include_guard}
 #define {include_guard}
 
-class {classname} {{
+class {classname}{superclass} {{
  public:
     {classname}();
 
@@ -52,7 +52,7 @@ INTERFACE_FORMATTER = '''/**
 #ifndef {include_guard}
 #define {include_guard}
 
-class {classname} {{
+class {classname}{superclass} {{
  public:
     virtual ~{classname}();
 
@@ -110,9 +110,25 @@ def get_include_guard(yaml_path):
         return 'INCLUDE_MIDSO_{}_{}_H_'.format(dirname1, basename)
 
 
+def get_superclass(yaml_path):
+    with open(yaml_path) as f:
+        data = yaml.load(f)
+        if 'superclass' in data:
+            superclasses = [get_class(i) for i in data['superclass']]
+            return ' : ' + ', '.join(superclasses)
+        else:
+            return ''
+
+
+def get_methods(yaml_path):
+    with open(yaml_path) as f:
+        data = yaml.load(f)
+        return data.get('method', '')
+
+
 def get_name(func_dict):
     if isinstance(func_dict, str):
-        assert '()' == func_dict[-2:]
+        assert '()' == func_dict[-2:], func_dict
         return func_dict[:-2]
     else:
         key = func_dict.keys()[0]
@@ -145,6 +161,7 @@ def get_args(func_dict, with_default=False):
         args = '\n        '.join(arg_list)
     return args
 
+
 def is_interface(yaml_path):
     classname = get_class(args.yaml_path)
     return classname.endswith('Interface')
@@ -156,14 +173,7 @@ def is_const_method(func_dict):
     else:
         key = func_dict.keys()[0]
         rettype = get_rettype(func_dict)
-        if 'args' in func_dict[key]:
-            return False
-        elif not rettype.startswith('const'):
-            return False
-        elif not rettype.endswith('&'):
-            return False
-        else:
-            return True
+        return not 'args' in func_dict[key] and rettype.endswith('&')
 
 
 def get_function_declare(func_dict, formatter):
@@ -176,8 +186,9 @@ def get_function_declare(func_dict, formatter):
 def get_interface_contents(yaml_path):
     include_guard = get_include_guard(yaml_path)
     classname = get_class(yaml_path)
+    superclass = get_superclass(args.yaml_path)
     declare_list = []
-    for func_dict in yaml.load(open(args.yaml_path)):
+    for func_dict in get_methods(args.yaml_path):
         if is_const_method(func_dict):
             formatter = INTERFACE_CONST_FUNC_FORMATTER
         else:
@@ -191,8 +202,9 @@ def get_interface_contents(yaml_path):
 def get_header_contents(yaml_path):
     include_guard = get_include_guard(yaml_path)
     classname = get_class(yaml_path)
+    superclass = get_superclass(args.yaml_path)
     declare_list = []
-    for func_dict in yaml.load(open(args.yaml_path)):
+    for func_dict in get_methods(args.yaml_path):
         if is_const_method(func_dict):
             formatter = DECLARE_CONST_FUNC_FORMATTER
         else:
@@ -214,7 +226,7 @@ def get_source_contents(yaml_path):
     basename = get_basename(yaml_path)
     classname = get_class(yaml_path)
     define_list = []
-    for func_dict in yaml.load(open(args.yaml_path)):
+    for func_dict in get_methods(args.yaml_path):
         define = get_function_define(func_dict, classname)
         define_list.append(define)
     defines = '\n\n'.join(define_list)
@@ -231,7 +243,7 @@ def get_test_contents(yaml_path):
     basename = get_basename(yaml_path)
     classname = get_class(yaml_path)
     test_list = []
-    for func_dict in yaml.load(open(args.yaml_path)):
+    for func_dict in get_methods(args.yaml_path):
         test = get_function_test(func_dict, classname)
         test_list.append(test)
     tests = '\n\n'.join(test_list)

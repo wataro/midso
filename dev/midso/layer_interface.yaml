@@ -2,7 +2,9 @@
 ---
 - propagate():
     args:
-    - {type: 'const Tensor &', name: input_node}
+    - {type: const Tensor &, name: input_node}
 - output_node():
-    return: 'const Tensor &'
+    return: const Tensor &
+- backward_layer():
+    return: Layer &
 
