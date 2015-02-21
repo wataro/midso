@@ -7,7 +7,6 @@ from pprint import pprint
 ARG_FORMATTER = '{type} {name}'
 ARG_WITH_DEFAULT_FORMATTER = '{type} {name} = {default}'
 
-MEMBER_FORMATTER = '{args};'
 DECLARE_FUNC_FORMATTER = '    {rettype} {name}({args});'
 DECLARE_CONST_FUNC_FORMATTER = '    {rettype} {name}({args}) const;'
 INTERFACE_FUNC_FORMATTER = '    virtual {rettype} {name}({args}) = 0;'
@@ -15,23 +14,24 @@ INTERFACE_CONST_FUNC_FORMATTER = (
     '    virtual {rettype} {name}({args}) const = 0;'
 )
 DEFINE_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}) {{\n}}'
+DEFINE_CONST_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}) {{\n}}'
 TEST_FUNC_FORMATTER = 'TEST({classname}, {name}) {{\n}}'
 
-HEADER_FORMATTER = '''/**
-    Copyright (c) 2015 <Taro WATASUE>
+COPYRIGHT = '''/**
+    Copyright (c) 2015 <wataro>
     
     This software is released under the MIT License.
 
     http://opensource.org/licenses/mit-license.php
-*/
+*/'''
+
+
+HEADER_FORMATTER = '''{COPYRIGHT}
 #ifndef {include_guard}
 #define {include_guard}
 
 class {classname}{superclass} {{
  public:
-    {classname}();
-
-    ~{classname}();
 
 {declares}
 
@@ -42,13 +42,7 @@ class {classname}{superclass} {{
 #endif  // {include_guard}
 '''
 
-INTERFACE_FORMATTER = '''/**
-    Copyright (c) 2015 <Taro WATASUE>
-    
-    This software is released under the MIT License.
-
-    http://opensource.org/licenses/mit-license.php
-*/
+INTERFACE_FORMATTER = '''{COPYRIGHT}
 #ifndef {include_guard}
 #define {include_guard}
 
@@ -63,25 +57,13 @@ class {classname}{superclass} {{
 #endif  // {include_guard}
 '''
 
-SOURCE_FORMATTER = '''/**
-    Copyright (c) 2015 <Taro WATASUE>
-    
-    This software is released under the MIT License.
-
-    http://opensource.org/licenses/mit-license.php
-*/
+SOURCE_FORMATTER = '''{COPYRIGHT}
 #include "midso/{basename}.h"
 
 {defines}
 '''
 
-TEST_FORMATTER = '''/**
-    Copyright (c) 2015 <Taro WATASUE>
-    
-    This software is released under the MIT License.
-
-    http://opensource.org/licenses/mit-license.php
-*/
+TEST_FORMATTER = '''{COPYRIGHT}
 #include <gtest/gtest.h>
 #include "midso/{basename}.h"
 
@@ -89,54 +71,79 @@ TEST_FORMATTER = '''/**
 '''
 
 def get_basename(yaml_path):
+    '''
+    >>> get_basename('/path/to/layer_interface.yaml')
+    'layer_interface'
+    '''
     rest, basename = path.split(yaml_path)
     return path.splitext(basename)[0]
 
 
-def get_class(yaml_path):
-    basename = get_basename(yaml_path)
+def get_class(basename):
+    '''
+    >>> get_class('layer_interface')
+    'LayerInterface'
+    '''
     words = basename.split('_')
     return ''.join(w.title() for w in words)
 
 
 def get_include_guard(yaml_path):
+    '''
+    >>> get_include_guard('include/midso/layer_interface.yaml')
+    'INCLUDE_MIDSO_LAYER_INTERFACE_H_'
+    >>> get_include_guard('include/midso/layer/linear_layer.yaml')
+    'INCLUDE_MIDSO_LAYER_LINEAR_LAYER_H_'
+    '''
     rest, basename = path.split(yaml_path)
     rest, dirname1 = path.split(rest)
     basename = path.splitext(basename)[0].upper()
     if 'midso' == dirname1:
         return 'INCLUDE_MIDSO_{}_H_'.format(basename)
     else:
+        dirname1 = dirname1.upper()
         assert 'midso' == path.basename(rest), rest
         return 'INCLUDE_MIDSO_{}_{}_H_'.format(dirname1, basename)
 
 
-def get_superclass(yaml_path):
-    with open(yaml_path) as f:
-        data = yaml.load(f)
-        if 'superclass' in data:
-            superclasses = [get_class(i) for i in data['superclass']]
-            return ' : ' + ', '.join(superclasses)
-        else:
-            return ''
-
-
-def get_methods(yaml_path):
-    with open(yaml_path) as f:
-        data = yaml.load(f)
-        return data.get('method', '')
-
-
-def get_name(func_dict):
-    if isinstance(func_dict, str):
-        assert '()' == func_dict[-2:], func_dict
-        return func_dict[:-2]
+def get_superclass(yaml_contents):
+    '''
+    to build headerfile
+    >>> get_superclass({'superclass': ['layer_interface']})
+    ' : LayerInterface'
+    >>> get_superclass({'superclass': ['layer_interface', 'trainable_interface']})
+    ' : LayerInterface, TrainableInterface'
+    '''
+    if 'superclass' in yaml_contents:
+        superclasses = [get_class(i) for i in yaml_contents['superclass']]
+        return ' : ' + ', '.join(superclasses)
     else:
-        key = func_dict.keys()[0]
-        assert '()' == key[-2:]
-        return key[:-2]
+        return ''
+
+
+def get_method_name(func_dict):
+    '''
+    >>> get_method_name('args_void_return_void()')
+    'args_void_return_void'
+    >>> get_method_name({'args_int_return_void()': {'args': {'type': 'int', 'name': 'n'}}})
+    'args_int_return_void'
+    >>> get_method_name({'args_void_return_int()': {'return': 'int'}})
+    'args_void_return_int'
+    '''
+    raw_method_name = func_dict if isinstance(func_dict, str) else func_dict.keys()[0]
+    assert raw_method_name.endswith('()'), raw_method_name
+    return raw_method_name[:-len('()')]
     
 
 def get_rettype(func_dict):
+    '''
+    >>> get_rettype('args_void_return_void()')
+    'void'
+    >>> get_rettype({'args_int_return_void()': {'args': {'type': 'int', 'name': 'n'}}})
+    'void'
+    >>> get_rettype({'args_void_return_int()': {'return': 'int'}})
+    'int'
+    '''
     if isinstance(func_dict, str):
         return 'void'
     else:
@@ -145,6 +152,20 @@ def get_rettype(func_dict):
 
 
 def get_args(func_dict, with_default=False):
+    '''
+    >>> get_args('func()')
+    ''
+    >>> get_args({'func()': {'return': 'int'}})
+    ''
+    >>> get_args({'func()': {'args': [{'type': 'int', 'name': 'n'}]}})
+    'int n'
+    >>> get_args({'func()': {'args': [{'type': 'int &', 'name': 'dst'}, {'type': 'const int', 'name': 'n'}]}})
+    'int & dst,\\n        const int n'
+    >>> get_args(
+    ...     {'func()': {'args': [{'type': 'int &', 'name': 'dst'}, {'type': 'const int', 'name': 'n', 'default': 1}]}},
+    ...     with_default=True)
+    'int & dst,\\n        const int n = 1'
+    '''
     if isinstance(func_dict, str):
         return ''
     else:
@@ -158,27 +179,38 @@ def get_args(func_dict, with_default=False):
             else:
                 arg = ARG_FORMATTER.format(**arg_dict)
             arg_list.append(arg)
-        args = '\n        '.join(arg_list)
+        args = ',\n        '.join(arg_list)
     return args
 
 
 def is_interface(yaml_path):
-    classname = get_class(args.yaml_path)
-    return classname.endswith('Interface')
-
-
-def is_const_method(func_dict):
-    if isinstance(func_dict, str):
-        return False
-    else:
-        key = func_dict.keys()[0]
-        rettype = get_rettype(func_dict)
-        return not 'args' in func_dict[key] and rettype.endswith('&')
+    '''
+    >>> is_interface('dev/midso/layer_interface.yaml')
+    True
+    >>> is_interface('dev/midso/layer/linear_layer.yaml')
+    False
+    '''
+    basename = get_basename(yaml_path)
+    return basename.endswith('_interface')
 
 
 def get_function_declare(func_dict, formatter):
+    '''
+    >>> get_function_declare('func()', DECLARE_FUNC_FORMATTER)
+    '    void func();'
+    >>> get_function_declare('func()', DECLARE_CONST_FUNC_FORMATTER)
+    '    void func() const;'
+    >>> get_function_declare({'func()': {'return': 'int'}}, DECLARE_CONST_FUNC_FORMATTER)
+    '    int func() const;'
+    >>> get_function_declare(
+    ...     {'func()': {'args': [{'type': 'int &', 'name': 'dst'}, {'type': 'const int', 'name': 'n', 'default': 1}]}},
+    ...     DECLARE_CONST_FUNC_FORMATTER)
+    '    void func(int & dst,\\n        const int n = 1) const;'
+    '''
     rettype = get_rettype(func_dict)
-    name = get_name(func_dict)
+    name = get_method_name(func_dict)
+    if name.startswith('const '):
+        name = name[len('const '):]
     args = get_args(func_dict, with_default=True)
     return formatter.format(**locals())
 
@@ -199,7 +231,7 @@ def get_interface_contents(yaml_path):
     return INTERFACE_FORMATTER.format(**locals())
 
 
-def get_header_contents(yaml_path):
+def get_header_contents(yaml_path, const_fomatter, noconst_formatter):
     include_guard = get_include_guard(yaml_path)
     classname = get_class(yaml_path)
     superclass = get_superclass(args.yaml_path)
@@ -284,12 +316,22 @@ def save_test_file(yaml_path):
         print 'saved: {}'.format(file_path)
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('yaml_path')
-    args = parser.parse_args()
-
+def main():
     save_header_file(args.yaml_path)
     save_source_file(args.yaml_path)
     save_test_file(args.yaml_path)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('yaml_path')
+    parser.add_argument('--test', action='store_true')
+    args = parser.parse_args()
+
+    if args.test:
+        import doctest
+        doctest.testmod()
+    else:
+        main()
+
 
