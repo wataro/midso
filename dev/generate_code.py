@@ -183,17 +183,6 @@ def get_args(func_dict, with_default=False):
     return args
 
 
-def is_interface(yaml_path):
-    '''
-    >>> is_interface('dev/midso/layer_interface.yaml')
-    True
-    >>> is_interface('dev/midso/layer/linear_layer.yaml')
-    False
-    '''
-    basename = get_basename(yaml_path)
-    return basename.endswith('_interface')
-
-
 def get_function_declare(func_dict, formatter):
     '''
     >>> get_function_declare('func()', DECLARE_FUNC_FORMATTER)
@@ -209,9 +198,42 @@ def get_function_declare(func_dict, formatter):
     '''
     rettype = get_rettype(func_dict)
     name = get_method_name(func_dict)
-    if name.startswith('const '):
-        name = name[len('const '):]
     args = get_args(func_dict, with_default=True)
+    return formatter.format(**locals())
+
+
+def is_interface(yaml_path):
+    '''
+    >>> is_interface('dev/midso/layer_interface.yaml')
+    True
+    >>> is_interface('dev/midso/layer/linear_layer.yaml')
+    False
+    '''
+    basename = get_basename(yaml_path)
+    return basename.endswith('_interface')
+
+
+def get_header_contents(yaml_contents, include_guard, classname, formatter):
+    '''
+    >>> yaml_contents = {
+    ...     'superclass':['layer_interface'],
+    ...     'method':[
+    ...         {'func()': {'args': [{'type': 'int &', 'name': 'dst'}, {'type': 'const int', 'name': 'n', 'default': 1}]}},
+    ...         {'propagate()': {'args':[{'type':'const Tensor &', 'name':'input_data'}]}},
+    ...     ],
+    ...     'const method':[
+    ...         {'output_node()': {'return':'const Tensor &'}}
+    ...     ]
+    '''
+    superclass = get_superclass(yaml_contents)
+    declare_list = []
+    for func_dict in yaml_contents['method']:
+        dec = get_function_declare(func_dict, DECLARE_FUNC_FORMATTER)
+        declare_list.append(dec)
+    for func_dict in yaml_contents['const method']:
+        dec = get_function_declare(func_dict, DECLARE_CONST_FUNC_FORMATTER)
+        declare_list.append(dec)
+    declares = '\n'.join(declare_list)
     return formatter.format(**locals())
 
 
