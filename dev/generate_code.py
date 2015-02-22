@@ -26,9 +26,10 @@ COPYRIGHT = '''/**
 */'''
 
 
-HEADER_FORMATTER = '''{COPYRIGHT}
+HEADER_FORMATTER = '''{copyright}
 #ifndef {include_guard}
 #define {include_guard}
+{includes}
 
 class {classname}{superclass} {{
  public:
@@ -42,9 +43,10 @@ class {classname}{superclass} {{
 #endif  // {include_guard}
 '''
 
-INTERFACE_FORMATTER = '''{COPYRIGHT}
+INTERFACE_FORMATTER = '''{copyright}
 #ifndef {include_guard}
 #define {include_guard}
+{includes}
 
 class {classname}{superclass} {{
  public:
@@ -57,13 +59,13 @@ class {classname}{superclass} {{
 #endif  // {include_guard}
 '''
 
-SOURCE_FORMATTER = '''{COPYRIGHT}
+SOURCE_FORMATTER = '''{copyright}
 #include "midso/{basename}.h"
 
 {defines}
 '''
 
-TEST_FORMATTER = '''{COPYRIGHT}
+TEST_FORMATTER = '''{copyright}
 #include <gtest/gtest.h>
 #include "midso/{basename}.h"
 
@@ -119,6 +121,20 @@ def get_superclass(yaml_contents):
         return ' : ' + ', '.join(superclasses)
     else:
         return ''
+
+
+def get_includes(yaml_contents):
+    '''
+    >>> get_includes({})
+    ''
+    >>> get_includes({'superclass': ['layer_interface']})
+    '#include "midso/layer_interface.h"'
+    >>> get_includes({'superclass': ['layer_interface', 'trainable_interface']})
+    '#include "midso/layer_interface.h"\\n#include "midso/trainable_interface.h"'
+    '''
+    super_bases = yaml_contents.get('superclass', [])
+    includes = ['#include "midso/{}.h"'.format(i) for i in super_bases]
+    return '\n'.join(includes)
 
 
 def get_method_name(func_dict):
@@ -213,103 +229,86 @@ def is_interface(yaml_path):
     return basename.endswith('_interface')
 
 
-def get_header_contents(yaml_contents, include_guard, classname, formatter):
-    '''
-    >>> yaml_contents = {
-    ...     'superclass':['layer_interface'],
-    ...     'method':[
-    ...         {'func()': {'args': [{'type': 'int &', 'name': 'dst'}, {'type': 'const int', 'name': 'n', 'default': 1}]}},
-    ...         {'propagate()': {'args':[{'type':'const Tensor &', 'name':'input_data'}]}},
-    ...     ],
-    ...     'const method':[
-    ...         {'output_node()': {'return':'const Tensor &'}}
-    ...     ]
-    '''
+def get_yaml_contents(yaml_path):
+    with open(yaml_path) as f:
+        return yaml.load(f)
+
+
+def get_header_contents(yaml_path):
+    basename = get_basename(yaml_path)
+    classname = get_class(basename)
+    include_guard = get_include_guard(yaml_path)
+    if is_interface(yaml_path):
+        formatter = INTERFACE_FORMATTER
+        func_formatter = INTERFACE_FUNC_FORMATTER
+        const_func_formatter = INTERFACE_CONST_FUNC_FORMATTER
+    else:
+        formatter = HEADER_FORMATTER
+        func_formatter = DECLARE_FUNC_FORMATTER
+        const_func_formatter = DECLARE_CONST_FUNC_FORMATTER
+    yaml_contents = get_yaml_contents(yaml_path)
+    includes = get_includes(yaml_contents)
     superclass = get_superclass(yaml_contents)
     declare_list = []
-    for func_dict in yaml_contents['method']:
-        dec = get_function_declare(func_dict, DECLARE_FUNC_FORMATTER)
+    for func_dict in yaml_contents.get('method', []):
+        dec = get_function_declare(func_dict, func_formatter)
         declare_list.append(dec)
-    for func_dict in yaml_contents['const method']:
-        dec = get_function_declare(func_dict, DECLARE_CONST_FUNC_FORMATTER)
+    for func_dict in yaml_contents.get('const method', []):
+        dec = get_function_declare(func_dict, const_func_formatter)
         declare_list.append(dec)
     declares = '\n'.join(declare_list)
+    copyright = COPYRIGHT
     return formatter.format(**locals())
 
 
-def get_interface_contents(yaml_path):
-    include_guard = get_include_guard(yaml_path)
-    classname = get_class(yaml_path)
-    superclass = get_superclass(args.yaml_path)
-    declare_list = []
-    for func_dict in get_methods(args.yaml_path):
-        if is_const_method(func_dict):
-            formatter = INTERFACE_CONST_FUNC_FORMATTER
-        else:
-            formatter = INTERFACE_FUNC_FORMATTER
-        dec = get_function_declare(func_dict, formatter)
-        declare_list.append(dec)
-    declares = '\n'.join(declare_list)
-    return INTERFACE_FORMATTER.format(**locals())
-
-
-def get_header_contents(yaml_path, const_fomatter, noconst_formatter):
-    include_guard = get_include_guard(yaml_path)
-    classname = get_class(yaml_path)
-    superclass = get_superclass(args.yaml_path)
-    declare_list = []
-    for func_dict in get_methods(args.yaml_path):
-        if is_const_method(func_dict):
-            formatter = DECLARE_CONST_FUNC_FORMATTER
-        else:
-            formatter = DECLARE_FUNC_FORMATTER
-        dec = get_function_declare(func_dict, formatter)
-        declare_list.append(dec)
-    declares = '\n'.join(declare_list)
-    return HEADER_FORMATTER.format(**locals())
-
-
-def get_function_define(func_dict, classname):
+def get_function_define(func_dict, classname, formatter):
     rettype = get_rettype(func_dict)
-    name = get_name(func_dict)
+    name = get_method_name(func_dict)
     args = get_args(func_dict)
-    return DEFINE_FUNC_FORMATTER.format(**locals())
+    return formatter.format(**locals())
 
 
 def get_source_contents(yaml_path):
     basename = get_basename(yaml_path)
-    classname = get_class(yaml_path)
+    classname = get_class(basename)
+    yaml_contents = get_yaml_contents(yaml_path)
     define_list = []
-    for func_dict in get_methods(args.yaml_path):
-        define = get_function_define(func_dict, classname)
+    for func_dict in yaml_contents.get('method', []):
+        define = get_function_define(func_dict, classname, DEFINE_FUNC_FORMATTER)
+        define_list.append(define)
+    for func_dict in yaml_contents.get('const method', []):
+        define = get_function_define(func_dict, classname, DEFINE_CONST_FUNC_FORMATTER)
         define_list.append(define)
     defines = '\n\n'.join(define_list)
+    copyright = COPYRIGHT
     return SOURCE_FORMATTER.format(**locals())
 
 
 def get_function_test(func_dict, classname):
     rettype = get_rettype(func_dict)
-    name = get_name(func_dict)
+    name = get_method_name(func_dict)
     return TEST_FUNC_FORMATTER.format(**locals())
 
 
 def get_test_contents(yaml_path):
     basename = get_basename(yaml_path)
-    classname = get_class(yaml_path)
+    classname = get_class(basename)
+    yaml_contents = get_yaml_contents(yaml_path)
     test_list = []
-    for func_dict in get_methods(args.yaml_path):
+    for func_dict in yaml_contents.get('method', []):
+        test = get_function_test(func_dict, classname)
+        test_list.append(test)
+    for func_dict in yaml_contents.get('const method', []):
         test = get_function_test(func_dict, classname)
         test_list.append(test)
     tests = '\n\n'.join(test_list)
+    copyright = COPYRIGHT
     return TEST_FORMATTER.format(**locals())
 
 
 def save_header_file(yaml_path):
+    contents = get_header_contents(yaml_path)
     basename = get_basename(yaml_path)
-    if is_interface(yaml_path):
-        contents = get_interface_contents(yaml_path)
-    else:
-        contents = get_header_contents(yaml_path)
     file_path = path.join('include', 'midso', '{}.h'.format(basename))
     with open(file_path, 'w') as f:
         f.write(contents)
