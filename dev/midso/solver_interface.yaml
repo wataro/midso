@@ -1,0 +1,9 @@
+%YAML 1.1
+---
+method:
+- SolverInterface():
+    args:
+    - {type: Network &, name: network}
+    - {type: const HyperParameter &, name: hyperam}
+- solve()
+
