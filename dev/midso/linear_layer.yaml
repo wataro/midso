@@ -3,6 +3,10 @@
 superclass:
 - layer_interface
 method:
+- LinearLayer():
+    args:
+    - {type: const Float &, name: multiplier, default: 1.0}
+    - {type: const Float &, name: accumulator, default: 0.0}
 - propagate():
     return: virtual void
     args:

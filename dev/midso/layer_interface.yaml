@@ -7,5 +7,5 @@ method:
 - output_node():
     return: const Tensor &
 - backward_layer():
-    return: Layer &
+    return: LayerInterface &
 
