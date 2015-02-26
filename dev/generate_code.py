@@ -151,17 +151,21 @@ def get_method_name(func_dict):
     return raw_method_name[:-len('()')]
     
 
-def get_rettype(func_dict):
+def get_rettype(func_dict, classname):
     '''
-    >>> get_rettype('args_void_return_void()')
+    >>> get_rettype('args_void_return_void()', 'LinearLayer')
     'void'
-    >>> get_rettype({'args_int_return_void()': {'args': {'type': 'int', 'name': 'n'}}})
+    >>> get_rettype({'args_int_return_void()': {'args': [{'type': 'int', 'name': 'n'}]}}, 'LinearLayer')
     'void'
-    >>> get_rettype({'args_void_return_int()': {'return': 'int'}})
+    >>> get_rettype({'args_void_return_int()': {'return': 'int'}}, 'LinearLayer')
     'int'
+    >>> get_rettype({'LinearLayer()': {'args': [{'type': 'int', 'name': 'a'}]}}, 'LinearLayer')
+    ''
     '''
     if isinstance(func_dict, str):
         return 'void'
+    elif get_method_name(func_dict) == classname:
+        return ''
     else:
         key = func_dict.keys()[0]
         return func_dict[key].get('return', 'void')
@@ -199,20 +203,20 @@ def get_args(func_dict, with_default=False):
     return args
 
 
-def get_function_declare(func_dict, formatter):
+def get_function_declare(func_dict, formatter, classname):
     '''
-    >>> get_function_declare('func()', DECLARE_FUNC_FORMATTER)
+    >>> get_function_declare('func()', DECLARE_FUNC_FORMATTER, 'LinearLayer')
     '    void func();'
-    >>> get_function_declare('func()', DECLARE_CONST_FUNC_FORMATTER)
+    >>> get_function_declare('func()', DECLARE_CONST_FUNC_FORMATTER, 'LinearLayer')
     '    void func() const;'
-    >>> get_function_declare({'func()': {'return': 'int'}}, DECLARE_CONST_FUNC_FORMATTER)
+    >>> get_function_declare({'func()': {'return': 'int'}}, DECLARE_CONST_FUNC_FORMATTER, 'LinearLayer')
     '    int func() const;'
     >>> get_function_declare(
     ...     {'func()': {'args': [{'type': 'int &', 'name': 'dst'}, {'type': 'const int', 'name': 'n', 'default': 1}]}},
-    ...     DECLARE_CONST_FUNC_FORMATTER)
+    ...     DECLARE_CONST_FUNC_FORMATTER, 'LinearLayer')
     '    void func(int & dst,\\n        const int n = 1) const;'
     '''
-    rettype = get_rettype(func_dict)
+    rettype = get_rettype(func_dict, classname)
     name = get_method_name(func_dict)
     args = get_args(func_dict, with_default=True)
     return formatter.format(**locals())
@@ -262,7 +266,7 @@ def get_header_contents(yaml_path):
 
 
 def get_function_define(func_dict, classname, formatter):
-    rettype = get_rettype(func_dict)
+    rettype = get_rettype(func_dict, classname)
     name = get_method_name(func_dict)
     args = get_args(func_dict)
     return formatter.format(**locals())
@@ -285,7 +289,6 @@ def get_source_contents(yaml_path):
 
 
 def get_function_test(func_dict, classname):
-    rettype = get_rettype(func_dict)
     name = get_method_name(func_dict)
     return TEST_FUNC_FORMATTER.format(**locals())
 
