@@ -149,6 +149,10 @@ def get_method_name(func_dict):
     raw_method_name = func_dict if isinstance(func_dict, str) else func_dict.keys()[0]
     assert raw_method_name.endswith('()'), raw_method_name
     return raw_method_name[:-len('()')]
+
+
+def is_constructor(func_dict, classname):
+    return get_method_name(func_dict) == classname
     
 
 def get_rettype(func_dict, classname):
@@ -164,7 +168,7 @@ def get_rettype(func_dict, classname):
     '''
     if isinstance(func_dict, str):
         return 'void'
-    elif get_method_name(func_dict) == classname:
+    elif is_constructor(func_dict, classname):
         return ''
     else:
         key = func_dict.keys()[0]
@@ -255,10 +259,10 @@ def get_header_contents(yaml_path):
     superclass = get_superclass(yaml_contents)
     declare_list = []
     for func_dict in yaml_contents.get('method', []):
-        dec = get_function_declare(func_dict, func_formatter)
+        dec = get_function_declare(func_dict, func_formatter, classname)
         declare_list.append(dec)
     for func_dict in yaml_contents.get('const method', []):
-        dec = get_function_declare(func_dict, const_func_formatter)
+        dec = get_function_declare(func_dict, const_func_formatter, classname)
         declare_list.append(dec)
     declares = '\n'.join(declare_list)
     copyright = COPYRIGHT
@@ -290,7 +294,10 @@ def get_source_contents(yaml_path):
 
 def get_function_test(func_dict, classname):
     name = get_method_name(func_dict)
-    return TEST_FUNC_FORMATTER.format(**locals())
+    if is_constructor(func_dict, classname):
+        return ''
+    else:
+        return TEST_FUNC_FORMATTER.format(**locals())
 
 
 def get_test_contents(yaml_path):
