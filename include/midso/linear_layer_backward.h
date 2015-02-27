@@ -1,0 +1,25 @@
+/**
+    Copyright (c) 2015 <wataro>
+    
+    This software is released under the MIT License.
+
+    http://opensource.org/licenses/mit-license.php
+*/
+#ifndef INCLUDE_MIDSO_LINEAR_LAYER_BACKWARD_H_
+#define INCLUDE_MIDSO_LINEAR_LAYER_BACKWARD_H_
+#include "midso/common.h"
+#include "midso/backward_layer_interface.h"
+
+class LinearLayerBackward : BackwardLayerInterface {
+ public:
+
+     LinearLayerBackward(const Float & multiplier = 1.0,
+        const Float & accumulator = 0.0);
+    virtual void propagate(const Tensor & input_node);
+    virtual const Tensor & output_node() const;
+
+ private:
+    DISALLOW_COPY_AND_ASIGN(LinearLayerBackward);
+};
+
+#endif  // INCLUDE_MIDSO_LINEAR_LAYER_BACKWARD_H_
