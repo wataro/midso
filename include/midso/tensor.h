@@ -10,9 +10,10 @@
 #include "midso/common.h"
 
 
+namespace midso {
+
 class Tensor {
  public:
-
     Float & operator[](const Size & index0 = 0,
         const Size & index1 = 0,
         const Size & index2 = 0,
@@ -36,5 +37,7 @@ class Tensor {
  private:
     DISALLOW_COPY_AND_ASIGN(Tensor);
 };
+
+}  // namespace midso
 
 #endif  // INCLUDE_MIDSO_TENSOR_H_

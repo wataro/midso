@@ -10,6 +10,8 @@
 #include "midso/common.h"
 
 
+namespace midso {
+
 class SolverInterface {
  public:
     virtual ~SolverInterface();
@@ -17,7 +19,8 @@ class SolverInterface {
     virtual  SolverInterface(Network & network,
         const HyperParameter & hyperam) = 0;
     virtual void solve() = 0;
-
 };
+
+}  // namespace midso
 
 #endif  // INCLUDE_MIDSO_SOLVER_INTERFACE_H_

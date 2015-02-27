@@ -10,9 +10,10 @@
 #include "midso/common.h"
 #include "midso/backward_layer_interface.h"
 
+namespace midso {
+
 class LinearLayerBackward : BackwardLayerInterface {
  public:
-
      LinearLayerBackward(const Float & multiplier = 1.0,
         const Float & accumulator = 0.0);
     virtual void propagate(const Tensor & input_node);
@@ -21,5 +22,7 @@ class LinearLayerBackward : BackwardLayerInterface {
  private:
     DISALLOW_COPY_AND_ASIGN(LinearLayerBackward);
 };
+
+}  // namespace midso
 
 #endif  // INCLUDE_MIDSO_LINEAR_LAYER_BACKWARD_H_

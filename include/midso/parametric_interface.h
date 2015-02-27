@@ -10,12 +10,15 @@
 #include "midso/common.h"
 
 
+namespace midso {
+
 class ParametricInterface {
  public:
     virtual ~ParametricInterface();
 
     virtual const Tensor & parameter() const = 0;
-
 };
+
+}  // namespace midso
 
 #endif  // INCLUDE_MIDSO_PARAMETRIC_INTERFACE_H_

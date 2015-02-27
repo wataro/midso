@@ -32,14 +32,17 @@ HEADER_FORMATTER = '''{copyright}
 #include "midso/common.h"
 {includes}
 
+namespace midso {{
+
 class {classname}{superclass} {{
  public:
-
 {declares}
 
  private:
     DISALLOW_COPY_AND_ASIGN({classname});
 }};
+
+}}  // namespace midso
 
 #endif  // {include_guard}
 '''
@@ -50,13 +53,16 @@ INTERFACE_FORMATTER = '''{copyright}
 #include "midso/common.h"
 {includes}
 
+namespace midso {{
+
 class {classname}{superclass} {{
  public:
     virtual ~{classname}();
 
 {declares}
-
 }};
+
+}}  // namespace midso
 
 #endif  // {include_guard}
 '''
@@ -64,7 +70,11 @@ class {classname}{superclass} {{
 SOURCE_FORMATTER = '''{copyright}
 #include "midso/{basename}.h"
 
+namespace midso {{
+
 {defines}
+
+}}  // namespace midso
 '''
 
 TEST_FORMATTER = '''{copyright}
@@ -275,7 +285,7 @@ def get_function_define(func_dict, classname, formatter):
     rettype = get_rettype(func_dict, classname)
     name = get_method_name(func_dict)
     args = get_args(func_dict)
-    return formatter.format(**locals())
+    return formatter.format(**locals()).strip()
 
 
 def get_source_contents(yaml_path):

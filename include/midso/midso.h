@@ -9,7 +9,7 @@
 #include "midso/tensor.h"
 #include "midso/layers.h"
 #include "midso/solvers.h"
-#endif // 0
+#endif  // 0
 
 #endif  // INCLUDE_MIDSO_MIDSO_H_
 
