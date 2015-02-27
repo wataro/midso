@@ -14,7 +14,7 @@ namespace midso {
 
 class SolverInterface {
  public:
-    virtual ~SolverInterface();
+    virtual ~SolverInterface() {}
 
     virtual  SolverInterface(Network & network,
         const HyperParameter & hyperam) = 0;

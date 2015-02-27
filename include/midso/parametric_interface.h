@@ -14,7 +14,7 @@ namespace midso {
 
 class ParametricInterface {
  public:
-    virtual ~ParametricInterface();
+    virtual ~ParametricInterface() {}
 
     virtual const Tensor & parameter() const = 0;
 };

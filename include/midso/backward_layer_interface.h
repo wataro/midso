@@ -14,7 +14,7 @@ namespace midso {
 
 class BackwardLayerInterface {
  public:
-    virtual ~BackwardLayerInterface();
+    virtual ~BackwardLayerInterface() {}
 
     virtual void propagate(const Tensor & input_node) = 0;
     virtual const Tensor & output_node() = 0;

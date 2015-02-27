@@ -14,7 +14,7 @@ namespace midso {
 
 class LayerInterface {
  public:
-    virtual ~LayerInterface();
+    virtual ~LayerInterface() {}
 
     virtual void propagate(const Tensor & input_node) = 0;
     virtual const Tensor & output_node() = 0;

@@ -14,7 +14,7 @@ INTERFACE_CONST_FUNC_FORMATTER = (
     '    virtual {rettype} {name}({args}) const = 0;'
 )
 DEFINE_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}) {{\n}}'
-DEFINE_CONST_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}) {{\n}}'
+DEFINE_CONST_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}) const {{\n}}'
 TEST_FUNC_FORMATTER = 'TEST({classname}, {name}) {{\n}}'
 
 COPYRIGHT = '''/**
@@ -36,10 +36,12 @@ namespace midso {{
 
 class {classname}{superclass} {{
  public:
+    {classname}() {{}}
+    ~{classname}() {{}}
 {declares}
 
  private:
-    DISALLOW_COPY_AND_ASIGN({classname});
+    DISALLOW_COPY_AND_ASSIGN({classname});
 }};
 
 }}  // namespace midso
@@ -57,7 +59,7 @@ namespace midso {{
 
 class {classname}{superclass} {{
  public:
-    virtual ~{classname}();
+    virtual ~{classname}() {{}}
 
 {declares}
 }};
@@ -78,7 +80,7 @@ namespace midso {{
 '''
 
 TEST_FORMATTER = '''{copyright}
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
 #include "midso/{basename}.h"
 
 {tests}
@@ -283,6 +285,8 @@ def get_header_contents(yaml_path):
 
 def get_function_define(func_dict, classname, formatter):
     rettype = get_rettype(func_dict, classname)
+    if rettype.startswith('virtual '):
+        rettype = rettype[len('virtual '):]
     name = get_method_name(func_dict)
     args = get_args(func_dict)
     return formatter.format(**locals()).strip()
@@ -323,6 +327,7 @@ def get_test_contents(yaml_path):
     for func_dict in yaml_contents.get('const method', []):
         test = get_function_test(func_dict, classname)
         test_list.append(test)
+    test_list = list(set(sorted(test_list)))
     tests = '\n\n'.join(test_list)
     copyright = COPYRIGHT
     return TEST_FORMATTER.format(**locals())

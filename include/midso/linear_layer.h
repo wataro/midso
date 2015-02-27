@@ -14,6 +14,8 @@ namespace midso {
 
 class LinearLayer : LayerInterface {
  public:
+    LinearLayer() {}
+    ~LinearLayer() {}
      LinearLayer(const Float & multiplier = 1.0,
         const Float & accumulator = 0.0);
     virtual void propagate(const Tensor & input_node);
@@ -21,7 +23,7 @@ class LinearLayer : LayerInterface {
     virtual const Tensor & output_node() const;
 
  private:
-    DISALLOW_COPY_AND_ASIGN(LinearLayer);
+    DISALLOW_COPY_AND_ASSIGN(LinearLayer);
 };
 
 }  // namespace midso

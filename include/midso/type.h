@@ -3,6 +3,7 @@
 */
 #ifndef INCLUDE_MIDSO_TYPE_H_
 #define INCLUDE_MIDSO_TYPE_H_
+#include <memory>
 #include <vector>
 
 namespace midso {

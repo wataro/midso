@@ -14,7 +14,9 @@ namespace midso {
 
 class Tensor {
  public:
-    Float & operator[](const Size & index0 = 0,
+    Tensor() {}
+    ~Tensor() {}
+    Float & at(const Size & index0 = 0,
         const Size & index1 = 0,
         const Size & index2 = 0,
         const Size & index3 = 0,
@@ -22,8 +24,8 @@ class Tensor {
         const Size & index5 = 0,
         const Size & index6 = 0,
         const Size & index7 = 0);
-    SharedPointer<Float> ptr();
-    const Float & operator[](const Size & index0 = 0,
+    Pointer<Float> ptr();
+    const Float & at(const Size & index0 = 0,
         const Size & index1 = 0,
         const Size & index2 = 0,
         const Size & index3 = 0,
@@ -31,11 +33,11 @@ class Tensor {
         const Size & index5 = 0,
         const Size & index6 = 0,
         const Size & index7 = 0) const;
-    const SharedPointer<Float> ptr() const;
+    const Pointer<Float> ptr() const;
     void copy_to(Tensor & dst) const;
 
  private:
-    DISALLOW_COPY_AND_ASIGN(Tensor);
+    DISALLOW_COPY_AND_ASSIGN(Tensor);
 };
 
 }  // namespace midso

@@ -1,7 +1,7 @@
 %YAML 1.1
 ---
 const method:
-- operator[]():
+- at():
     return: 'const Float &'
     args:
     - {type: 'const Size &', name: index0, default: 0}
@@ -13,12 +13,12 @@ const method:
     - {type: 'const Size &', name: index6, default: 0}
     - {type: 'const Size &', name: index7, default: 0}
 - ptr():
-    return: 'const SharedPointer<Float>'
+    return: 'const Pointer<Float>'
 - copy_to():
     args:
     - {type: 'Tensor &', name: dst}
 method:
-- operator[]():
+- at():
     return: 'Float &'
     args:
     - {type: 'const Size &', name: index0, default: 0}
@@ -30,5 +30,5 @@ method:
     - {type: 'const Size &', name: index6, default: 0}
     - {type: 'const Size &', name: index7, default: 0}
 - ptr():
-    return: 'SharedPointer<Float>'
+    return: 'Pointer<Float>'
 
