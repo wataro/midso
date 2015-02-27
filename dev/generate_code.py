@@ -29,6 +29,7 @@ COPYRIGHT = '''/**
 HEADER_FORMATTER = '''{copyright}
 #ifndef {include_guard}
 #define {include_guard}
+#include "midso/common.h"
 {includes}
 
 class {classname}{superclass} {{
@@ -46,6 +47,7 @@ class {classname}{superclass} {{
 INTERFACE_FORMATTER = '''{copyright}
 #ifndef {include_guard}
 #define {include_guard}
+#include "midso/common.h"
 {includes}
 
 class {classname}{superclass} {{

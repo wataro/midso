@@ -1,0 +1,17 @@
+%YAML 1.1
+---
+superclass:
+- backward_layer_interface
+method:
+- LinearLayerBackward():
+    args:
+    - {type: const Float &, name: multiplier, default: 1.0}
+    - {type: const Float &, name: accumulator, default: 0.0}
+- propagate():
+    return: virtual void
+    args:
+    - {type: const Tensor &, name: input_node}
+const method:
+- output_node():
+    return: virtual const Tensor &
+
