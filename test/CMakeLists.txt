@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(test_midso)
-add_executable(test_midso gtest_main.cc gtest-all.cc)
-target_link_libraries(test_midso pthread)
+include_directories(../include ../src)
+file(GLOB SRC_FILES ../src/midso/*.cpp *.cc midso/*.cpp)
+add_executable(${PROJECT_NAME} ${SRC_FILES})
+target_link_libraries(${PROJECT_NAME} pthread)
 
