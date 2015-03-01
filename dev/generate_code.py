@@ -70,7 +70,7 @@ class {classname}{superclass} {{
 '''
 
 SOURCE_FORMATTER = '''{copyright}
-#include "midso/{basename}.h"
+#include "midso/{pathto}{basename}.h"
 
 namespace midso {{
 
@@ -85,6 +85,21 @@ TEST_FORMATTER = '''{copyright}
 
 {tests}
 '''
+
+def get_pathto(yaml_path):
+    '''
+    >>> get_pathto('dev/midso/layer/layer_interface.yaml')
+    'layer/'
+    >>> get_pathto('dev/midso/layer/backward/backward_layer_interface.yaml')
+    'layer/backward/'
+    '''
+    rest, basename = path.split(yaml_path)
+    pathto = ''
+    while not rest.endswith('midso') and '' != rest:
+        rest, basename = path.split(rest)
+        pathto = path.join(basename, pathto)
+    return pathto
+
 
 def get_basename(yaml_path):
     '''
@@ -293,6 +308,7 @@ def get_function_define(func_dict, classname, formatter):
 
 
 def get_source_contents(yaml_path):
+    pathto = get_pathto(yaml_path)
     basename = get_basename(yaml_path)
     classname = get_class(basename)
     yaml_contents = get_yaml_contents(yaml_path)
@@ -334,9 +350,10 @@ def get_test_contents(yaml_path):
 
 
 def save_header_file(yaml_path):
+    pathto = get_pathto(yaml_path)
     contents = get_header_contents(yaml_path)
     basename = get_basename(yaml_path)
-    file_path = path.join('include', 'midso', '{}.h'.format(basename))
+    file_path = path.join('include', 'midso', pathto, '{}.h'.format(basename))
     with open(file_path, 'w') as f:
         f.write(contents)
         print 'saved: {}'.format(file_path)
@@ -345,9 +362,10 @@ def save_header_file(yaml_path):
 def save_source_file(yaml_path):
     if is_interface(yaml_path):
         return
+    pathto = get_pathto(yaml_path)
     basename = get_basename(yaml_path)
     contents = get_source_contents(yaml_path)
-    file_path = path.join('src', 'midso', '{}.cpp'.format(basename))
+    file_path = path.join('src', 'midso', pathto, '{}.cpp'.format(basename))
     with open(file_path, 'w') as f:
         f.write(contents)
         print 'saved: {}'.format(file_path)
@@ -356,9 +374,10 @@ def save_source_file(yaml_path):
 def save_test_file(yaml_path):
     if is_interface(yaml_path):
         return
+    pathto = get_pathto(yaml_path)
     basename = get_basename(yaml_path)
     contents = get_test_contents(yaml_path)
-    file_path = path.join('test', 'midso', '{}.cpp'.format(basename))
+    file_path = path.join('test', 'midso', pathto, '{}.cpp'.format(basename))
     with open(file_path, 'w') as f:
         f.write(contents)
         print 'saved: {}'.format(file_path)
