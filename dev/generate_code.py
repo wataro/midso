@@ -272,6 +272,7 @@ def get_yaml_contents(yaml_path):
 
 
 def get_header_contents(yaml_path):
+    copyright = COPYRIGHT
     basename = get_basename(yaml_path)
     classname = get_class(basename)
     include_guard = get_include_guard(yaml_path)
@@ -284,6 +285,11 @@ def get_header_contents(yaml_path):
         func_formatter = DECLARE_FUNC_FORMATTER
         const_func_formatter = DECLARE_CONST_FUNC_FORMATTER
     yaml_contents = get_yaml_contents(yaml_path)
+    if yaml_contents is None:
+        includes = ''
+        superclass = ''
+        declares = ''
+        return formatter.format(**locals())
     includes = get_includes(yaml_contents)
     superclass = get_superclass(yaml_contents)
     declare_list = []
@@ -294,7 +300,6 @@ def get_header_contents(yaml_path):
         dec = get_function_declare(func_dict, const_func_formatter, classname)
         declare_list.append(dec)
     declares = '\n'.join(declare_list)
-    copyright = COPYRIGHT
     return formatter.format(**locals())
 
 
@@ -308,10 +313,14 @@ def get_function_define(func_dict, classname, formatter):
 
 
 def get_source_contents(yaml_path):
+    copyright = COPYRIGHT
     pathto = get_pathto(yaml_path)
     basename = get_basename(yaml_path)
     classname = get_class(basename)
     yaml_contents = get_yaml_contents(yaml_path)
+    if yaml_contents is None:
+        defines = ''
+        return SOURCE_FORMATTER.format(**locals())
     define_list = []
     for func_dict in yaml_contents.get('method', []):
         define = get_function_define(func_dict, classname, DEFINE_FUNC_FORMATTER)
@@ -320,7 +329,6 @@ def get_source_contents(yaml_path):
         define = get_function_define(func_dict, classname, DEFINE_CONST_FUNC_FORMATTER)
         define_list.append(define)
     defines = '\n\n'.join(define_list)
-    copyright = COPYRIGHT
     return SOURCE_FORMATTER.format(**locals())
 
 
@@ -333,9 +341,13 @@ def get_function_test(func_dict, classname):
 
 
 def get_test_contents(yaml_path):
+    copyright = COPYRIGHT
     basename = get_basename(yaml_path)
     classname = get_class(basename)
     yaml_contents = get_yaml_contents(yaml_path)
+    if yaml_contents is None:
+        tests = ''
+        return TEST_FORMATTER.format(**locals())
     test_list = []
     for func_dict in yaml_contents.get('method', []):
         test = get_function_test(func_dict, classname)
@@ -345,7 +357,6 @@ def get_test_contents(yaml_path):
         test_list.append(test)
     test_list = list(set(sorted(test_list)))
     tests = '\n\n'.join(test_list)
-    copyright = COPYRIGHT
     return TEST_FORMATTER.format(**locals())
 
 
