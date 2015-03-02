@@ -1,0 +1,34 @@
+%YAML 1.1
+---
+const method:
+- at():
+    return: 'const Float &'
+    args:
+    - {type: 'const Size &', name: index0, default: 0}
+    - {type: 'const Size &', name: index1, default: 0}
+    - {type: 'const Size &', name: index2, default: 0}
+    - {type: 'const Size &', name: index3, default: 0}
+    - {type: 'const Size &', name: index4, default: 0}
+    - {type: 'const Size &', name: index5, default: 0}
+    - {type: 'const Size &', name: index6, default: 0}
+    - {type: 'const Size &', name: index7, default: 0}
+- ptr():
+    return: 'const Pointer<Float>'
+- copy_to():
+    args:
+    - {type: 'Tensor &', name: dst}
+method:
+- at():
+    return: 'Float &'
+    args:
+    - {type: 'const Size &', name: index0, default: 0}
+    - {type: 'const Size &', name: index1, default: 0}
+    - {type: 'const Size &', name: index2, default: 0}
+    - {type: 'const Size &', name: index3, default: 0}
+    - {type: 'const Size &', name: index4, default: 0}
+    - {type: 'const Size &', name: index5, default: 0}
+    - {type: 'const Size &', name: index6, default: 0}
+    - {type: 'const Size &', name: index7, default: 0}
+- ptr():
+    return: 'Pointer<Float>'
+
