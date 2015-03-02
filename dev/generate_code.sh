@@ -1,23 +1,23 @@
 #!/usr/bin/env bash
 
-for i in dev/midso/*.yaml;
+for i in `find dev/midso/ -name "*.yaml"`
 do
-    python dev/generate_code.py $i
+    python dev/generate_code.py -f $i
 done
 
 ls -R include/midso src/midso test/midso
 
-for i in include/midso/*.h
+for i in `find include/midso/ -name "*.h"`
 do
     python rule/cpplint.py $i
 done
 
-for i in src/midso/*.cpp
+for i in `find src/midso/ -name "*.cpp"`
 do
     python rule/cpplint.py $i
 done
 
-for i in test/midso/*.cpp
+for i in `find test/midso/ -name "*.cpp"`
 do
     python rule/cpplint.py $i
 done

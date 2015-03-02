@@ -1,9 +1,0 @@
-%YAML 1.1
----
-method:
-- propagate():
-    args:
-    - {type: const Tensor &, name: input_node}
-- output_node():
-    return: const Tensor &
-

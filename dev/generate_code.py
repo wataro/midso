@@ -125,7 +125,15 @@ def get_include_guard(yaml_path):
     'INCLUDE_MIDSO_LAYER_INTERFACE_H_'
     >>> get_include_guard('include/midso/layer/linear_layer.yaml')
     'INCLUDE_MIDSO_LAYER_LINEAR_LAYER_H_'
+    >>> get_include_guard('include/midso/layer/backward/linear_layer_backward.yaml')
+    'INCLUDE_MIDSO_LAYER_BACKWARD_LINEAR_LAYER_BACKWARD_H_'
     '''
+    basename = get_basename(yaml_path).upper()
+    pathto = get_pathto(yaml_path)
+    pathto = '_'.join(pathto.split('/'))
+    pathto = pathto.upper()
+    return 'INCLUDE_MIDSO_{}{}_H_'.format(pathto, basename)
+    """
     rest, basename = path.split(yaml_path)
     rest, dirname1 = path.split(rest)
     basename = path.splitext(basename)[0].upper()
@@ -135,6 +143,7 @@ def get_include_guard(yaml_path):
         dirname1 = dirname1.upper()
         assert 'midso' == path.basename(rest), rest
         return 'INCLUDE_MIDSO_{}_{}_H_'.format(dirname1, basename)
+    """
 
 
 def get_superclass(yaml_contents):
@@ -360,49 +369,62 @@ def get_test_contents(yaml_path):
     return TEST_FORMATTER.format(**locals())
 
 
-def save_header_file(yaml_path):
+def save_header_file(args):
+    yaml_path = args.yaml_path
     pathto = get_pathto(yaml_path)
     contents = get_header_contents(yaml_path)
     basename = get_basename(yaml_path)
     file_path = path.join('include', 'midso', pathto, '{}.h'.format(basename))
+    if path.exists(file_path) and not args.overwrite:
+        print 'ERROR: {} exists. If you want to overwrite it, use -f option.'.format(file_path)
+        return
     with open(file_path, 'w') as f:
         f.write(contents)
         print 'saved: {}'.format(file_path)
 
 
-def save_source_file(yaml_path):
+def save_source_file(args):
+    yaml_path = args.yaml_path
     if is_interface(yaml_path):
         return
     pathto = get_pathto(yaml_path)
     basename = get_basename(yaml_path)
     contents = get_source_contents(yaml_path)
     file_path = path.join('src', 'midso', pathto, '{}.cpp'.format(basename))
+    if path.exists(file_path) and not args.overwrite:
+        print 'ERROR: {} exists. If you want to overwrite it, use -f option.'.format(file_path)
+        return
     with open(file_path, 'w') as f:
         f.write(contents)
         print 'saved: {}'.format(file_path)
 
 
-def save_test_file(yaml_path):
+def save_test_file(args):
+    yaml_path = args.yaml_path
     if is_interface(yaml_path):
         return
     pathto = get_pathto(yaml_path)
     basename = get_basename(yaml_path)
     contents = get_test_contents(yaml_path)
     file_path = path.join('test', 'midso', pathto, '{}.cpp'.format(basename))
+    if path.exists(file_path) and not args.overwrite:
+        print 'ERROR: {} exists. If you want to overwrite it, use -f option.'.format(file_path)
+        return
     with open(file_path, 'w') as f:
         f.write(contents)
         print 'saved: {}'.format(file_path)
 
 
-def main():
-    save_header_file(args.yaml_path)
-    save_source_file(args.yaml_path)
-    save_test_file(args.yaml_path)
+def main(args):
+    save_header_file(args)
+    save_source_file(args)
+    save_test_file(args)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('yaml_path')
+    parser.add_argument('-f', '--force', dest='overwrite', action='store_true')
     parser.add_argument('--test', action='store_true')
     args = parser.parse_args()
 
@@ -410,6 +432,6 @@ if __name__ == '__main__':
         import doctest
         doctest.testmod()
     else:
-        main()
+        main(args)
 
 
