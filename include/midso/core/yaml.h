@@ -5,23 +5,23 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#ifndef INCLUDE_MIDSO_IO_HDF5_H_
-#define INCLUDE_MIDSO_IO_HDF5_H_
+#ifndef INCLUDE_MIDSO_CORE_YAML_H_
+#define INCLUDE_MIDSO_CORE_YAML_H_
 #include "midso/common.h"
 
 
 namespace midso {
 
-class Hdf5 {
+class Yaml {
  public:
-    Hdf5() {}
-    ~Hdf5() {}
+    Yaml() {}
+    ~Yaml() {}
 
 
  private:
-    DISALLOW_COPY_AND_ASSIGN(Hdf5);
+    DISALLOW_COPY_AND_ASSIGN(Yaml);
 };
 
 }  // namespace midso
 
-#endif  // INCLUDE_MIDSO_IO_HDF5_H_
+#endif  // INCLUDE_MIDSO_CORE_YAML_H_
