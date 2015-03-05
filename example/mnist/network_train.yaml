@@ -1,0 +1,51 @@
+%YAML 1.1
+---
+layer:
+  - name: input_data
+    type: data
+    dimensions: [784]
+    source: {file: example/mnist/data.h5, name: input}
+  - name: output_data
+    type: data
+    dimensions: [1]
+    source: {file: example/mnist/data.h5, name: output}
+  - name: conv1
+    type: convolution
+    dimensions: [8, 24, 24]
+  - name: mp1
+    type: maxpool
+    dimensions: [4, 12, 12]
+  - name: conv2
+    type: convolution
+    dimensions: [16, 8, 8]
+  - name: relu2
+    type: relu
+  - name: mp2
+    type: maxpool
+    dimensions: [8, 4, 4]
+  - name: drop_local1
+    type: dropout
+    option: {droprate: 0.5}
+  - name: local1
+    type: locally_connected
+    dimensions: [32, 2, 2]
+  - name: drop_full1
+    type: dropout
+    option: {droprate: 0.5}
+  - name: full1
+    type: fully_connected
+    dimensions: [128]
+  - name: out
+    type: logistic_regression
+network:
+  - [input_data, conv1]
+  - [conv1, mp1]
+  - [mp1, conv2]
+  - [conv2, relu2]
+  - [relu2, drop-local1]
+  - [drop-local1, local1]
+  - [local1, drop-full1]
+  - [drop-full1, full1]
+  - [full1, out]
+  - [output_data, out]
+

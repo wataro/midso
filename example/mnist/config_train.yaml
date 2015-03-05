@@ -1,0 +1,5 @@
+%YAML 1.1
+---
+network: example/mnist/network_train.yaml
+solver: example/mnist/solver.yaml
+
