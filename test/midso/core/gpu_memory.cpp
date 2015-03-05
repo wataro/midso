@@ -5,10 +5,7 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#include "midso/core/g_p_u_memory.h"
-
-namespace midso {
-
+#include "gtest/gtest.h"
+#include "midso/gpu_memory.h"
 
 
-}  // namespace midso
