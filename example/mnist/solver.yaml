@@ -3,4 +3,6 @@
 solver: adadelta
 learning rate: 1e-3
 momentum: 0.999
+temination criteria:
+  max update: 1e+6
 

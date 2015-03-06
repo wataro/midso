@@ -133,29 +133,18 @@ def get_include_guard(yaml_path):
     pathto = '_'.join(pathto.split('/'))
     pathto = pathto.upper()
     return 'INCLUDE_MIDSO_{}{}_H_'.format(pathto, basename)
-    """
-    rest, basename = path.split(yaml_path)
-    rest, dirname1 = path.split(rest)
-    basename = path.splitext(basename)[0].upper()
-    if 'midso' == dirname1:
-        return 'INCLUDE_MIDSO_{}_H_'.format(basename)
-    else:
-        dirname1 = dirname1.upper()
-        assert 'midso' == path.basename(rest), rest
-        return 'INCLUDE_MIDSO_{}_{}_H_'.format(dirname1, basename)
-    """
 
 
 def get_superclass(yaml_contents):
     '''
     to build headerfile
-    >>> get_superclass({'superclass': ['layer_interface']})
+    >>> get_superclass({'superclass': ['dev/midso/layer/layer_interface.yaml']})
     ' : LayerInterface'
-    >>> get_superclass({'superclass': ['layer_interface', 'trainable_interface']})
-    ' : LayerInterface, TrainableInterface'
+    >>> get_superclass({'superclass': ['dev/midso/layer/layer_interface', 'dev/midso/layer/backward/backward_layer_interface.yaml']})
+    ' : LayerInterface, BackwardLayerInterface'
     '''
     if 'superclass' in yaml_contents:
-        superclasses = [get_class(i) for i in yaml_contents['superclass']]
+        superclasses = [get_class(get_basename(i)) for i in yaml_contents['superclass']]
         return ' : ' + ', '.join(superclasses)
     else:
         return ''
@@ -165,13 +154,13 @@ def get_includes(yaml_contents):
     '''
     >>> get_includes({})
     ''
-    >>> get_includes({'superclass': ['layer_interface']})
-    '#include "midso/layer_interface.h"'
-    >>> get_includes({'superclass': ['layer_interface', 'trainable_interface']})
-    '#include "midso/layer_interface.h"\\n#include "midso/trainable_interface.h"'
+    >>> get_includes({'superclass': ['dev/midso/layer/layer_interface.yaml']})
+    '#include "midso/layer/layer_interface.h"'
+    >>> get_includes({'superclass': ['dev/midso/layer/layer_interface', 'dev/midso/layer/backward/backward_layer_interface.yaml']})
+    '#include "midso/layer/layer_interface.h"\\n#include "midso/layer/backward/backward_layer_interface.h"'
     '''
     super_bases = yaml_contents.get('superclass', [])
-    includes = ['#include "midso/{}.h"'.format(i) for i in super_bases]
+    includes = ['#include "midso/{}{}.h"'.format(get_pathto(i), get_basename(i)) for i in super_bases]
     return '\n'.join(includes)
 
 

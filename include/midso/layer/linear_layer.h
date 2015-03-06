@@ -8,7 +8,7 @@
 #ifndef INCLUDE_MIDSO_LAYER_LINEAR_LAYER_H_
 #define INCLUDE_MIDSO_LAYER_LINEAR_LAYER_H_
 #include "midso/common.h"
-#include "midso/layer_interface.h"
+#include "midso/layer/layer_interface.h"
 
 namespace midso {
 

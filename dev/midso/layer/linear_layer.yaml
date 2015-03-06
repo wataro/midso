@@ -1,7 +1,7 @@
 %YAML 1.1
 ---
 superclass:
-- layer_interface
+- dev/midso/layer/layer_interface
 method:
 - LinearLayer():
     args:

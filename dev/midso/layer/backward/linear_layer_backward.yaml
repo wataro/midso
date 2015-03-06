@@ -1,7 +1,8 @@
 %YAML 1.1
 ---
 superclass:
-- backward_layer_interface
+- dev/midso/layer/layer_interface
+- dev/midso/layer/backward/backward_layer_interface
 method:
 - LinearLayerBackward():
     args:

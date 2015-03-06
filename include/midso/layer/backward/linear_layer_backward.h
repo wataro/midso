@@ -8,11 +8,12 @@
 #ifndef INCLUDE_MIDSO_LAYER_BACKWARD_LINEAR_LAYER_BACKWARD_H_
 #define INCLUDE_MIDSO_LAYER_BACKWARD_LINEAR_LAYER_BACKWARD_H_
 #include "midso/common.h"
-#include "midso/backward_layer_interface.h"
+#include "midso/layer/layer_interface.h"
+#include "midso/layer/backward/backward_layer_interface.h"
 
 namespace midso {
 
-class LinearLayerBackward : BackwardLayerInterface {
+class LinearLayerBackward : LayerInterface, BackwardLayerInterface {
  public:
     LinearLayerBackward() {}
     ~LinearLayerBackward() {}
