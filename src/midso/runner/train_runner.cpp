@@ -9,6 +9,11 @@
 
 namespace midso {
 
+TrainRunner::TrainRunner(const Yaml & config,
+        const Network & network) {
+}
 
+void TrainRunner::run() {
+}
 
 }  // namespace midso

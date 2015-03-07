@@ -1,0 +1,11 @@
+%YAML 1.1
+---
+superclass:
+- dev/midso/runner/runner_interface.yaml
+method:
+- TrainRunner():
+    args:
+    - {type: const Yaml &, name: config}
+    - {type: const Network &, name: network}
+- run()
+

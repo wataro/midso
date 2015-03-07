@@ -9,3 +9,6 @@
 #include "midso/train_runner.h"
 
 
+
+TEST(TrainRunner, run) {
+}
