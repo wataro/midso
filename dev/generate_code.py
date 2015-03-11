@@ -139,13 +139,13 @@ def get_superclass(yaml_contents):
     '''
     to build headerfile
     >>> get_superclass({'superclass': ['dev/midso/layer/layer_interface.yaml']})
-    ' : LayerInterface'
+    ' : public LayerInterface'
     >>> get_superclass({'superclass': ['dev/midso/layer/layer_interface', 'dev/midso/layer/backward/backward_layer_interface.yaml']})
-    ' : LayerInterface, BackwardLayerInterface'
+    ' : public LayerInterface, public BackwardLayerInterface'
     '''
     if 'superclass' in yaml_contents:
         superclasses = [get_class(get_basename(i)) for i in yaml_contents['superclass']]
-        return ' : ' + ', '.join(superclasses)
+        return ' : public ' + ', public '.join(superclasses)
     else:
         return ''
 
