@@ -10,6 +10,9 @@
 
 
 
+TEST(LinearLayer, load) {
+}
+
 TEST(LinearLayer, output_node) {
 }
 

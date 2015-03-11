@@ -13,6 +13,9 @@ LinearLayer::LinearLayer(const Float & multiplier,
         const Float & accumulator) {
 }
 
+static LinearLayer * LinearLayer::load(const Yaml & config) {
+}
+
 void LinearLayer::propagate(const Tensor & input_node) {
 }
 

@@ -7,14 +7,14 @@ from pprint import pprint
 ARG_FORMATTER = '{type} {name}'
 ARG_WITH_DEFAULT_FORMATTER = '{type} {name} = {default}'
 
-DECLARE_FUNC_FORMATTER = '    {rettype} {name}({args});'
-DECLARE_CONST_FUNC_FORMATTER = '    {rettype} {name}({args}) const;'
-INTERFACE_FUNC_FORMATTER = '    virtual {rettype} {name}({args}) = 0;'
+DECLARE_FUNC_FORMATTER = '    {rettype}{name}({args});'
+DECLARE_CONST_FUNC_FORMATTER = '    {rettype}{name}({args}) const;'
+INTERFACE_FUNC_FORMATTER = '    virtual {rettype}{name}({args}) = 0;'
 INTERFACE_CONST_FUNC_FORMATTER = (
     '    virtual {rettype} {name}({args}) const = 0;'
 )
-DEFINE_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}) {{\n}}'
-DEFINE_CONST_FUNC_FORMATTER = '{rettype} {classname}::{name}({args}) const {{\n}}'
+DEFINE_FUNC_FORMATTER = '{rettype}{classname}::{name}({args}) {{\n}}'
+DEFINE_CONST_FUNC_FORMATTER = '{rettype}{classname}::{name}({args}) const {{\n}}'
 TEST_FUNC_FORMATTER = 'TEST({classname}, {name}) {{\n}}'
 
 COPYRIGHT = '''/**
@@ -185,21 +185,21 @@ def is_constructor(func_dict, classname):
 def get_rettype(func_dict, classname):
     '''
     >>> get_rettype('args_void_return_void()', 'LinearLayer')
-    'void'
+    'void '
     >>> get_rettype({'args_int_return_void()': {'args': [{'type': 'int', 'name': 'n'}]}}, 'LinearLayer')
-    'void'
+    'void '
     >>> get_rettype({'args_void_return_int()': {'return': 'int'}}, 'LinearLayer')
-    'int'
+    'int '
     >>> get_rettype({'LinearLayer()': {'args': [{'type': 'int', 'name': 'a'}]}}, 'LinearLayer')
     ''
     '''
     if isinstance(func_dict, str):
-        return 'void'
+        return 'void '
     elif is_constructor(func_dict, classname):
         return ''
     else:
         key = func_dict.keys()[0]
-        return func_dict[key].get('return', 'void')
+        return func_dict[key].get('return', 'void') + ' '
 
 
 def get_args(func_dict, with_default=False):

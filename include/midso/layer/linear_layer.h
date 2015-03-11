@@ -12,15 +12,16 @@
 
 namespace midso {
 
-class LinearLayer : LayerInterface {
+class LinearLayer : public LayerInterface {
  public:
     LinearLayer() {}
     ~LinearLayer() {}
-     LinearLayer(const Float & multiplier = 1.0,
+    LinearLayer(const Float & multiplier = 1.0,
         const Float & accumulator = 0.0);
-    virtual void propagate(const Tensor & input_node);
-    virtual LayerInterface & backward_layer();
-    virtual const Tensor & output_node() const;
+    static LinearLayer * load(const Yaml & config);
+    void propagate(const Tensor & input_node);
+    LayerInterface & backward_layer();
+    const Tensor & output_node() const;
 
  private:
     DISALLOW_COPY_AND_ASSIGN(LinearLayer);
