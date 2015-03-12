@@ -1,0 +1,23 @@
+%YAML 1.1
+---
+superclass:
+- dev/midso/layer/layer_interface.yaml
+- dev/midso/layer/parametric_interface.yaml
+method:
+- load():
+    return: static BiasLayer *
+    args:
+    - {type: const Yaml &, name: config}
+- propagate():
+    args:
+    - {type: const Tensor &, name: input_node}
+- backward_layer():
+    return: LayerInterface &
+- parameter():
+    return: const Tensor &
+const method:
+- parameter():
+    return: const Tensor &
+- output_node():
+    return: const Tensor &
+
