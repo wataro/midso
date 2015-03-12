@@ -24,4 +24,4 @@ Midso is pronouced "miso": the Japanese soybean paste.
 
 ## overview
 
-![](https://github.com/github/wataro/midso/doc/image/structure.png)
+![](https://github.com/wataro/midso/doc/image/structure.png)
