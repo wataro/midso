@@ -22,6 +22,3 @@ Midso is pronouced "miso": the Japanese soybean paste.
 - HDF5 >= 1.8.11
 - clang >= 3.5
 
-## overview
-
-![](https://github.com/wataro/midso/doc/image/structure.png)
