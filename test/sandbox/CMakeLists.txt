@@ -19,3 +19,9 @@ file(GLOB ${PROJECT_NAME}_SRC_FILES test_layer_policy.cpp ../gtest-all.cc ../gte
 cuda_add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SRC_FILES})
 target_link_libraries(${PROJECT_NAME} pthread)
 
+project(sandbox_pointer)
+include_directories(..)
+file(GLOB ${PROJECT_NAME}_SRC_FILES test_pointer.cpp ../gtest-all.cc ../gtest_main.cc)
+cuda_add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SRC_FILES})
+target_link_libraries(${PROJECT_NAME} pthread)
+
