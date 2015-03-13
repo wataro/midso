@@ -5,20 +5,20 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#ifndef INCLUDE_MIDSO_LAYER_FULLY_CONNECTED_LAYER_H_
-#define INCLUDE_MIDSO_LAYER_FULLY_CONNECTED_LAYER_H_
+#ifndef INCLUDE_MIDSO_LAYER_LOGISTIC_REGRESSION_LAYER_H_
+#define INCLUDE_MIDSO_LAYER_LOGISTIC_REGRESSION_LAYER_H_
 #include "midso/common.h"
 #include "midso/layer/layer_interface.h"
 #include "midso/layer/parametric_interface.h"
 
 namespace midso {
 
-class FullyConnectedLayer : public LayerInterface, public ParametricInterface {
+class LogisticRegressionLayer : public LayerInterface, public ParametricInterface {
  public:
-    FullyConnectedLayer() {}
-    ~FullyConnectedLayer() {}
-    FullyConnectedLayer(const Size & n_outs);
-    static FullyConnectedLayer * load(const Yaml & config);
+    LogisticRegressionLayer() {}
+    ~LogisticRegressionLayer() {}
+    LogisticRegressionLayer(const Size & n_outs);
+    static LogisticRegressionLayer * load(const Yaml & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();
@@ -28,9 +28,9 @@ class FullyConnectedLayer : public LayerInterface, public ParametricInterface {
     const Tensor & output_node() const;
 
  private:
-    DISALLOW_COPY_AND_ASSIGN(FullyConnectedLayer);
+    DISALLOW_COPY_AND_ASSIGN(LogisticRegressionLayer);
 };
 
 }  // namespace midso
 
-#endif  // INCLUDE_MIDSO_LAYER_FULLY_CONNECTED_LAYER_H_
+#endif  // INCLUDE_MIDSO_LAYER_LOGISTIC_REGRESSION_LAYER_H_

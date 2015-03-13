@@ -16,7 +16,8 @@ class ParametricInterface {
  public:
     virtual ~ParametricInterface() {}
 
-    virtual const Tensor & parameter() const = 0;
+    virtual void update_parameter(const Tensor & diff) = 0;
+    virtual const Tensor &  parameter() const = 0;
 };
 
 }  // namespace midso

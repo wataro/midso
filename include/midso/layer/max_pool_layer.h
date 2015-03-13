@@ -8,15 +8,24 @@
 #ifndef INCLUDE_MIDSO_LAYER_MAX_POOL_LAYER_H_
 #define INCLUDE_MIDSO_LAYER_MAX_POOL_LAYER_H_
 #include "midso/common.h"
-
+#include "midso/layer/layer_interface.h"
 
 namespace midso {
 
-class MaxPoolLayer {
+class MaxPoolLayer : public LayerInterface {
  public:
     MaxPoolLayer() {}
     ~MaxPoolLayer() {}
-
+    MaxPoolLayer(const Size & pool_size_row = 2,
+        const Size & pool_size_col = 2,
+        const Size & step_size_row = 2,
+        const Size & step_size_col = 2);
+    static MaxPoolLayer * load(const Yaml & config);
+    void init(const Tensor & input_node);
+    void set_input(const Tensor & input_node);
+    void propagate();
+    LayerInterface & backward_layer();
+    const Tensor & output_node() const;
 
  private:
     DISALLOW_COPY_AND_ASSIGN(MaxPoolLayer);

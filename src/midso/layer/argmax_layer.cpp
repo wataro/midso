@@ -9,6 +9,22 @@
 
 namespace midso {
 
+static ArgmaxLayer * ArgmaxLayer::load(const Yaml & config) {
+}
 
+void ArgmaxLayer::init(const Tensor & input_node) {
+}
+
+void ArgmaxLayer::set_input(const Tensor & input_node) {
+}
+
+void ArgmaxLayer::propagate() {
+}
+
+LayerInterface & ArgmaxLayer::backward_layer() {
+}
+
+const Tensor & ArgmaxLayer::output_node() const {
+}
 
 }  // namespace midso

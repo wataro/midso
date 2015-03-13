@@ -9,3 +9,27 @@
 #include "midso/locally_connected_layer.h"
 
 
+
+TEST(LocallyConnectedLayer, init) {
+}
+
+TEST(LocallyConnectedLayer, output_node) {
+}
+
+TEST(LocallyConnectedLayer, propagate) {
+}
+
+TEST(LocallyConnectedLayer, update_parameter) {
+}
+
+TEST(LocallyConnectedLayer, set_input) {
+}
+
+TEST(LocallyConnectedLayer, backward_layer) {
+}
+
+TEST(LocallyConnectedLayer, parameter) {
+}
+
+TEST(LocallyConnectedLayer, load) {
+}

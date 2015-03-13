@@ -13,10 +13,16 @@
 TEST(LinearLayer, load) {
 }
 
+TEST(LinearLayer, init) {
+}
+
 TEST(LinearLayer, output_node) {
 }
 
 TEST(LinearLayer, propagate) {
+}
+
+TEST(LinearLayer, set_input) {
 }
 
 TEST(LinearLayer, backward_layer) {

@@ -9,14 +9,20 @@
 
 namespace midso {
 
-LinearLayer::LinearLayer(const Float & multiplier,
-        const Float & accumulator) {
+LinearLayer::LinearLayer(const Float & mul,
+        const Float & add) {
 }
 
 static LinearLayer * LinearLayer::load(const Yaml & config) {
 }
 
-void LinearLayer::propagate(const Tensor & input_node) {
+void LinearLayer::init(const Tensor & input_node) {
+}
+
+void LinearLayer::set_input(const Tensor & input_node) {
+}
+
+void LinearLayer::propagate() {
 }
 
 LayerInterface & LinearLayer::backward_layer() {

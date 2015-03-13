@@ -8,15 +8,22 @@
 #ifndef INCLUDE_MIDSO_LAYER_MAX_OUT_LAYER_H_
 #define INCLUDE_MIDSO_LAYER_MAX_OUT_LAYER_H_
 #include "midso/common.h"
-
+#include "midso/layer/layer_interface.h"
 
 namespace midso {
 
-class MaxOutLayer {
+class MaxOutLayer : public LayerInterface {
  public:
     MaxOutLayer() {}
     ~MaxOutLayer() {}
-
+    void MaxoutLayer(const Size & pool_size = 2,
+        const Size & step_size = 2);
+    static MaxoutLayer * load(const Yaml & config);
+    void init(const Tensor & input_node);
+    void set_input(const Tensor & input_node);
+    void propagate();
+    LayerInterface & backward_layer();
+    const Tensor & output_node() const;
 
  private:
     DISALLOW_COPY_AND_ASSIGN(MaxOutLayer);

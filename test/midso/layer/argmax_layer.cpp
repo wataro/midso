@@ -8,4 +8,20 @@
 #include "gtest/gtest.h"
 #include "midso/argmax_layer.h"
 
+TEST(ArgmaxLayer, load) {
+}
 
+TEST(ArgmaxLayer, set_input) {
+}
+
+TEST(ArgmaxLayer, propagate) {
+}
+
+TEST(ArgmaxLayer, init) {
+}
+
+TEST(ArgmaxLayer, backward_layer) {
+}
+
+TEST(ArgmaxLayer, output_node) {
+}

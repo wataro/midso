@@ -9,3 +9,27 @@
 #include "midso/convolutional_layer.h"
 
 
+
+TEST(ConvolutionalLayer, backward_layer) {
+}
+
+TEST(ConvolutionalLayer, init) {
+}
+
+TEST(ConvolutionalLayer, set_input) {
+}
+
+TEST(ConvolutionalLayer, output_node) {
+}
+
+TEST(ConvolutionalLayer, propagate) {
+}
+
+TEST(ConvolutionalLayer, update_parameter) {
+}
+
+TEST(ConvolutionalLayer, load) {
+}
+
+TEST(ConvolutionalLayer, parameter) {
+}

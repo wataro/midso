@@ -13,11 +13,11 @@
 
 namespace midso {
 
-class LinearLayerBackward : LayerInterface, BackwardLayerInterface {
+class LinearLayerBackward : public LayerInterface, public BackwardLayerInterface {
  public:
     LinearLayerBackward() {}
     ~LinearLayerBackward() {}
-     LinearLayerBackward(const Float & multiplier = 1.0,
+    LinearLayerBackward(const Float & multiplier = 1.0,
         const Float & accumulator = 0.0);
     virtual void propagate(const Tensor & input_node);
     virtual const Tensor & output_node() const;
