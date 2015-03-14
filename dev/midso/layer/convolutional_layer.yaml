@@ -1,0 +1,37 @@
+%YAML 1.1
+---
+superclass:
+- dev/midso/layer/layer_interface.yaml
+- dev/midso/layer/parametric_interface.yaml
+method:
+- ConvolutionalLayer():
+    args:
+    - {type: const Size &, name: n_maps}
+    - {type: const Size &, name: n_rows}
+    - {type: const Size &, name: n_cols}
+    - {type: const Size &, name: n_steps_map, default: 1}
+    - {type: const Size &, name: n_steps_row, default: 1}
+    - {type: const Size &, name: n_steps_col, default: 1}
+- load():
+    return: static ConvolutionalLayer *
+    args:
+    - {type: const Yaml &, name: config}
+- init():
+    args:
+    - {type: const Tensor &, name: input_node}
+- set_input():
+    args:
+    - {type: const Tensor &, name: input_node}
+- propagate()
+- backward_layer():
+    return: LayerInterface &
+- update_parameter():
+    args:
+    - {type: const Tensor &, name: diff}
+const method:
+- parameter():
+    return: const Tensor &
+- output_node():
+    return: const Tensor &
+
+

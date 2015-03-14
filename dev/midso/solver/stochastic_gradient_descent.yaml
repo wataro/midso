@@ -1,0 +1,12 @@
+%YAML 1.1
+---
+method:
+- StochasticGradientDescent():
+    args:
+    - {type: Network &, name: network}
+- load():
+    return: static StochasticGradientDescent *
+    args:
+    - {type: const Yaml &, name: config}
+- solve()
+

@@ -9,16 +9,14 @@
 #define INCLUDE_MIDSO_RUNNER_TRAIN_RUNNER_H_
 #include "midso/common.h"
 #include "midso/runner/runner_interface.h"
-#include "midso/network/network.h"
-#include "midso/core/yaml.h"
 
 namespace midso {
 
-class TrainRunner : RunnerInterface {
+class TrainRunner : public RunnerInterface {
  public:
     TrainRunner() {}
     ~TrainRunner() {}
-     TrainRunner(const Yaml & config,
+    TrainRunner(const Yaml & config,
         const Network & network);
     void run();
 

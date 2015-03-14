@@ -1,0 +1,12 @@
+%YAML 1.1
+---
+method:
+- Rmsprop():
+    args:
+    - {type: Network &, name: network}
+- load():
+    return: static Rmsprop *
+    args:
+    - {type: const Yaml &, name: config}
+- solve()
+

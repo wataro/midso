@@ -1,0 +1,29 @@
+%YAML 1.1
+---
+superclass:
+- dev/midso/layer/layer_interface
+method:
+- MaxPoolLayer():
+    args:
+    - {type: const Size &, name: pool_size_row, default: 2}
+    - {type: const Size &, name: pool_size_col, default: 2}
+    - {type: const Size &, name: step_size_row, default: 2}
+    - {type: const Size &, name: step_size_col, default: 2}
+- load():
+    return: static MaxPoolLayer *
+    args:
+    - {type: const Yaml &, name: config}
+- init():
+    args:
+    - {type: const Tensor &, name: input_node}
+- set_input():
+    args:
+    - {type: const Tensor &, name: input_node}
+- propagate()
+- backward_layer():
+    return: LayerInterface &
+const method:
+- output_node():
+    return: const Tensor &
+
+

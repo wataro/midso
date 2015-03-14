@@ -16,7 +16,9 @@ class Adadelta {
  public:
     Adadelta() {}
     ~Adadelta() {}
-
+    Adadelta(Network & network);
+    static Adadelta * load(const Yaml & config);
+    void solve();
 
  private:
     DISALLOW_COPY_AND_ASSIGN(Adadelta);

@@ -16,7 +16,9 @@ class Rmsprop {
  public:
     Rmsprop() {}
     ~Rmsprop() {}
-
+    Rmsprop(Network & network);
+    static Rmsprop * load(const Yaml & config);
+    void solve();
 
  private:
     DISALLOW_COPY_AND_ASSIGN(Rmsprop);

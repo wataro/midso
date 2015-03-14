@@ -1,0 +1,31 @@
+%YAML 1.1
+---
+superclass:
+- dev/midso/layer/layer_interface.yaml
+- dev/midso/layer/parametric_interface.yaml
+method:
+- FullyConnectedLayer():
+    args:
+    - {type: const Size &, name: n_outs}
+- load():
+    return: static FullyConnectedLayer *
+    args:
+    - {type: const Yaml &, name: config}
+- init():
+    args:
+    - {type: const Tensor &, name: input_node}
+- set_input():
+    args:
+    - {type: const Tensor &, name: input_node}
+- propagate()
+- backward_layer():
+    return: LayerInterface &
+- update_parameter():
+    args:
+    - {type: const Tensor &, name: diff}
+const method:
+- parameter():
+    return: const Tensor &
+- output_node():
+    return: const Tensor &
+

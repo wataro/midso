@@ -5,16 +5,19 @@ superclass:
 method:
 - LinearLayer():
     args:
-    - {type: const Float &, name: multiplier, default: 1.0}
-    - {type: const Float &, name: accumulator, default: 0.0}
+    - {type: const Float &, name: mul, default: 1.0}
+    - {type: const Float &, name: add, default: 0.0}
 - load():
     return: static LinearLayer *
     args:
     - {type: const Yaml &, name: config}
-- propagate():
-    return: void
+- init():
     args:
     - {type: const Tensor &, name: input_node}
+- set_input():
+    args:
+    - {type: const Tensor &, name: input_node}
+- propagate()
 - backward_layer():
     return: LayerInterface &
 const method:

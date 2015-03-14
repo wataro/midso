@@ -8,13 +8,21 @@ method:
     return: static BiasLayer *
     args:
     - {type: const Yaml &, name: config}
+- init():
+    args:
+    - {type: const Tensor &, name: input_node}
 - propagate():
     args:
     - {type: const Tensor &, name: input_node}
+- set_input():
+    args:
+    - {type: const Tensor &, name: input_node}
+- propagate()
 - backward_layer():
     return: LayerInterface &
-- parameter():
-    return: const Tensor &
+- update_parameter():
+    args:
+    - {type: const Tensor &, name: diff}
 const method:
 - parameter():
     return: const Tensor &

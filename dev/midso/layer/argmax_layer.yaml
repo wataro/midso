@@ -1,0 +1,22 @@
+%YAML 1.1
+---
+superclass:
+- dev/midso/layer/layer_interface
+method:
+- load():
+    return: static ArgmaxLayer *
+    args:
+    - {type: const Yaml &, name: config}
+- init():
+    args:
+    - {type: const Tensor &, name: input_node}
+- set_input():
+    args:
+    - {type: const Tensor &, name: input_node}
+- propagate()
+- backward_layer():
+    return: LayerInterface &
+const method:
+- output_node():
+    return: const Tensor &
+

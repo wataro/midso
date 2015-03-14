@@ -16,7 +16,9 @@ class StochasticGradientDescent {
  public:
     StochasticGradientDescent() {}
     ~StochasticGradientDescent() {}
-
+    StochasticGradientDescent(Network & network);
+    static StochasticGradientDescent * load(const Yaml & config);
+    void solve();
 
  private:
     DISALLOW_COPY_AND_ASSIGN(StochasticGradientDescent);

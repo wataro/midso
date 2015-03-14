@@ -9,3 +9,9 @@
 #include "midso/adadelta.h"
 
 
+
+TEST(Adadelta, solve) {
+}
+
+TEST(Adadelta, load) {
+}

@@ -9,3 +9,9 @@
 #include "midso/stochastic_gradient_descent.h"
 
 
+
+TEST(StochasticGradientDescent, load) {
+}
+
+TEST(StochasticGradientDescent, solve) {
+}

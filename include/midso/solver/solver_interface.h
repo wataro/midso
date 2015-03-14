@@ -16,8 +16,6 @@ class SolverInterface {
  public:
     virtual ~SolverInterface() {}
 
-    virtual  SolverInterface(Network & network,
-        const HyperParameter & hyperam) = 0;
     virtual void solve() = 0;
 };
 

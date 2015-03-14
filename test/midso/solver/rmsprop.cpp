@@ -9,3 +9,9 @@
 #include "midso/rmsprop.h"
 
 
+
+TEST(Rmsprop, solve) {
+}
+
+TEST(Rmsprop, load) {
+}
