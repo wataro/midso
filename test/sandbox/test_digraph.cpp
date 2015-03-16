@@ -1,12 +1,16 @@
 #include "gtest/gtest.h"
-#include <vector>
 #include <algorithm>
+#include <memory>
+#include <vector>
 
 template<typename T_>
 using Vector = std::vector<T_>;
 
 template<typename T1_, typename T2_>
 using Pair = std::pair<T1_, T2_>;
+
+template<typename T_>
+using Pointer = std::shared_ptr<T_>;
 
 template<typename T_>
 class Layer
@@ -33,33 +37,37 @@ class Layer
 };
 
 template<typename T_>
+struct Vertex_
+{
+    typedef T_ Item;
+    typedef Vertex_<Item> Vertex;
+    Vertex_(Item key, Item value): key_(key), depends_(1, value){}
+    Item key_;
+    Vector<Item> depends_;
+};
+
+template<typename T_>
 class Digraph
 {
     public:
     typedef T_* Item;
     typedef Pair<Item, Item> Arc;
-    typedef Pair<Item, Vector<Item>> Vertex;
-    struct VertexFind {
-        VertexFind(const Item key): key_(key){}
-        Item key_;
-        bool operator()(const Vertex & v)
-        {
-            return this->key_ == v.first;
-        }
-    };
+    typedef Vertex_<Item> Vertex;
     Digraph(Vector<Arc> & arcs) : arcs_(arcs)
     {
         this->build_dependencies();
     }
 
-    void propagate()
+    Vector<Vertex> & vertices() {
+        return this->vertices_;
+    }
+    static Vector<Arc> reversed_arcs(Vector<Arc> & arcs)
     {
-        for(auto vertex: this->vertices_) {
-            for(auto depend: vertex.second) {
-                vertex.first->set_input(depend->output());
-            }
-            vertex.first->propagate();
+        Vector<Arc> arcs_rev(arcs.rbegin(), arcs.rend());
+        for(auto & arc: arcs_rev) {
+            std::swap(arc.first, arc.second);
         }
+        return arcs_rev;
     }
     private:
     void build_dependencies()
@@ -67,18 +75,18 @@ class Digraph
         if (this->arcs_.empty()) {
             return;
         }
-        Item & root = this->arcs_.front().first;
-        this->vertices_.push_back(Vertex(root, Vector<Item>(1, root)));
         for(auto arc: this->arcs_) {
             auto key = arc.second;
-            auto value = arc.first;
-            auto it = std::find_if(this->vertices_.begin(), this->vertices_.end(), VertexFind(key));
+            auto it = std::find_if(this->vertices_.begin(), this->vertices_.end(),
+                                   [key](const Vertex & v) { return v.key_ == key; });
             if (this->vertices_.end() == it) {
-                this->vertices_.push_back(Vertex(key, Vector<Item>(1, value)));
+                auto value = arc.first;
+                this->vertices_.push_back(Vertex(key, value));
             }
             else
             {
-                it->second.push_back(value);
+                auto value = arc.first;
+                it->depends_.push_back(value);
             }
         }
     }
@@ -110,6 +118,19 @@ TEST(SANDBOX, DIGRAPH)
     arcs.push_back(arc_array[4]);
     arcs.push_back(arc_array[5]);
     Digraph<Layer<char>> digraph(arcs);
-    digraph.propagate();
+    for(auto vertex: digraph.vertices()) {
+        for(auto depend: vertex.depends_) {
+            vertex.key_->set_input(depend->output());
+        }
+        vertex.key_->propagate();
+    }
+    arcs = Digraph<Layer<char>>::reversed_arcs(arcs);
+    Digraph<Layer<char>> digraph_rev(arcs);
+    for(auto vertex: digraph_rev.vertices()) {
+        for(auto depend: vertex.depends_) {
+            vertex.key_->set_input(depend->output());
+        }
+        vertex.key_->propagate();
+    }
 }
 
