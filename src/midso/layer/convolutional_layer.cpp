@@ -17,7 +17,7 @@ ConvolutionalLayer::ConvolutionalLayer(const Size & n_maps,
         const Size & n_steps_col) {
 }
 
-static ConvolutionalLayer * ConvolutionalLayer::load(const Yaml & config) {
+static ConvolutionalLayer * ConvolutionalLayer::load(const KeyValue & config) {
 }
 
 void ConvolutionalLayer::init(const Tensor & input_node) {
@@ -29,7 +29,7 @@ void ConvolutionalLayer::set_input(const Tensor & input_node) {
 void ConvolutionalLayer::propagate() {
 }
 
-LayerInterface & ConvolutionalLayer::backward_layer() {
+BackwardLayerInterface & ConvolutionalLayer::backward_layer() {
 }
 
 void ConvolutionalLayer::update_parameter(const Tensor & diff) {

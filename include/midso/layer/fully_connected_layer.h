@@ -18,11 +18,11 @@ class FullyConnectedLayer : public LayerInterface, public ParametricInterface {
     FullyConnectedLayer() {}
     ~FullyConnectedLayer() {}
     FullyConnectedLayer(const Size & n_outs);
-    static FullyConnectedLayer * load(const Yaml & config);
+    static FullyConnectedLayer * load(const KeyValue & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();
-    LayerInterface & backward_layer();
+    BackwardLayerInterface & backward_layer();
     void update_parameter(const Tensor & diff);
     const Tensor & parameter() const;
     const Tensor & output_node() const;

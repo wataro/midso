@@ -17,7 +17,7 @@ LocallyConnectedLayer::LocallyConnectedLayer(const Size & n_maps,
         const Size & n_steps_col) {
 }
 
-static LocallyConnectedLayer * LocallyConnectedLayer::load(const Yaml & config) {
+static LocallyConnectedLayer * LocallyConnectedLayer::load(const KeyValue & config) {
 }
 
 void LocallyConnectedLayer::init(const Tensor & input_node) {
@@ -29,7 +29,7 @@ void LocallyConnectedLayer::set_input(const Tensor & input_node) {
 void LocallyConnectedLayer::propagate() {
 }
 
-LayerInterface & LocallyConnectedLayer::backward_layer() {
+BackwardLayerInterface & LocallyConnectedLayer::backward_layer() {
 }
 
 void LocallyConnectedLayer::update_parameter(const Tensor & diff) {

@@ -12,7 +12,7 @@ method:
 - load():
     return: static MaxPoolLayer *
     args:
-    - {type: const Yaml &, name: config}
+    - {type: const KeyValue &, name: config}
 - init():
     args:
     - {type: const Tensor &, name: input_node}
@@ -21,7 +21,7 @@ method:
     - {type: const Tensor &, name: input_node}
 - propagate()
 - backward_layer():
-    return: LayerInterface &
+    return: BackwardLayerInterface &
 const method:
 - output_node():
     return: const Tensor &

@@ -12,7 +12,7 @@ namespace midso {
 FullyConnectedLayer::FullyConnectedLayer(const Size & n_outs) {
 }
 
-static FullyConnectedLayer * FullyConnectedLayer::load(const Yaml & config) {
+static FullyConnectedLayer * FullyConnectedLayer::load(const KeyValue & config) {
 }
 
 void FullyConnectedLayer::init(const Tensor & input_node) {
@@ -24,7 +24,7 @@ void FullyConnectedLayer::set_input(const Tensor & input_node) {
 void FullyConnectedLayer::propagate() {
 }
 
-LayerInterface & FullyConnectedLayer::backward_layer() {
+BackwardLayerInterface & FullyConnectedLayer::backward_layer() {
 }
 
 void FullyConnectedLayer::update_parameter(const Tensor & diff) {

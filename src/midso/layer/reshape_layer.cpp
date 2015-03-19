@@ -9,6 +9,30 @@
 
 namespace midso {
 
+ReshapeLayer::ReshapeLayer(const Size & n_maps,
+        const Size & n_rows,
+        const Size & n_cols) {
+}
 
+static ReshapeLayer * ReshapeLayer::load(const KeyValue & config) {
+}
+
+void ReshapeLayer::init(const Tensor & input_node) {
+}
+
+void ReshapeLayer::propagate(const Tensor & input_node) {
+}
+
+void ReshapeLayer::set_input(const Tensor & input_node) {
+}
+
+void ReshapeLayer::propagate() {
+}
+
+BackwardLayerInterface & ReshapeLayer::backward_layer() {
+}
+
+const Tensor & ReshapeLayer::output_node() const {
+}
 
 }  // namespace midso

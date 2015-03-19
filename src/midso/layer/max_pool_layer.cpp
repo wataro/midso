@@ -15,7 +15,7 @@ MaxPoolLayer::MaxPoolLayer(const Size & pool_size_row,
         const Size & step_size_col) {
 }
 
-static MaxPoolLayer * MaxPoolLayer::load(const Yaml & config) {
+static MaxPoolLayer * MaxPoolLayer::load(const KeyValue & config) {
 }
 
 void MaxPoolLayer::init(const Tensor & input_node) {
@@ -27,7 +27,7 @@ void MaxPoolLayer::set_input(const Tensor & input_node) {
 void MaxPoolLayer::propagate() {
 }
 
-LayerInterface & MaxPoolLayer::backward_layer() {
+BackwardLayerInterface & MaxPoolLayer::backward_layer() {
 }
 
 const Tensor & MaxPoolLayer::output_node() const {

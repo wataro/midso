@@ -1,0 +1,30 @@
+%YAML 1.1
+---
+superclass:
+- dev/midso/layer/layer_interface.yaml
+method:
+- ReshapeLayer():
+    args:
+    - {type: const Size &, name: n_maps}
+    - {type: const Size &, name: n_rows}
+    - {type: const Size &, name: n_cols}
+- load():
+    return: static ReshapeLayer *
+    args:
+    - {type: const KeyValue &, name: config}
+- init():
+    args:
+    - {type: const Tensor &, name: input_node}
+- propagate():
+    args:
+    - {type: const Tensor &, name: input_node}
+- set_input():
+    args:
+    - {type: const Tensor &, name: input_node}
+- propagate()
+- backward_layer():
+    return: BackwardLayerInterface &
+const method:
+- output_node():
+    return: const Tensor &
+

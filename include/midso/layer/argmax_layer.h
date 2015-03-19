@@ -16,11 +16,11 @@ class ArgmaxLayer : public LayerInterface {
  public:
     ArgmaxLayer() {}
     ~ArgmaxLayer() {}
-    static ArgmaxLayer * load(const Yaml & config);
+    static ArgmaxLayer * load(const KeyValue & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();
-    LayerInterface & backward_layer();
+    BackwardLayerInterface & backward_layer();
     const Tensor & output_node() const;
 
  private:

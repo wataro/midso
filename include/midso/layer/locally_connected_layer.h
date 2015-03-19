@@ -23,11 +23,11 @@ class LocallyConnectedLayer : public LayerInterface, public ParametricInterface 
         const Size & n_steps_map = 1,
         const Size & n_steps_row = 1,
         const Size & n_steps_col = 1);
-    static LocallyConnectedLayer * load(const Yaml & config);
+    static LocallyConnectedLayer * load(const KeyValue & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();
-    LayerInterface & backward_layer();
+    BackwardLayerInterface & backward_layer();
     void update_parameter(const Tensor & diff);
     const Tensor & parameter() const;
     const Tensor & output_node() const;

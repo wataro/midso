@@ -18,11 +18,11 @@ class LinearLayer : public LayerInterface {
     ~LinearLayer() {}
     LinearLayer(const Float & mul = 1.0,
         const Float & add = 0.0);
-    static LinearLayer * load(const Yaml & config);
+    static LinearLayer * load(const KeyValue & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();
-    LayerInterface & backward_layer();
+    BackwardLayerInterface & backward_layer();
     const Tensor & output_node() const;
 
  private:

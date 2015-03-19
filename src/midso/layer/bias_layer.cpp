@@ -9,7 +9,7 @@
 
 namespace midso {
 
-static BiasLayer * BiasLayer::load(const Yaml & config) {
+static BiasLayer * BiasLayer::load(const KeyValue & config) {
 }
 
 void BiasLayer::init(const Tensor & input_node) {
@@ -24,7 +24,7 @@ void BiasLayer::set_input(const Tensor & input_node) {
 void BiasLayer::propagate() {
 }
 
-LayerInterface & BiasLayer::backward_layer() {
+BackwardLayerInterface & BiasLayer::backward_layer() {
 }
 
 void BiasLayer::update_parameter(const Tensor & diff) {

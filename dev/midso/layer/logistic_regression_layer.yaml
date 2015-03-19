@@ -10,7 +10,7 @@ method:
 - load():
     return: static LogisticRegressionLayer *
     args:
-    - {type: const Yaml &, name: config}
+    - {type: const KeyValue &, name: config}
 - init():
     args:
     - {type: const Tensor &, name: input_node}
@@ -19,7 +19,7 @@ method:
     - {type: const Tensor &, name: input_node}
 - propagate()
 - backward_layer():
-    return: LayerInterface &
+    return: BackwardLayerInterface &
 - update_parameter():
     args:
     - {type: const Tensor &, name: diff}

@@ -18,11 +18,11 @@ class MaxOutLayer : public LayerInterface {
     ~MaxOutLayer() {}
     void MaxoutLayer(const Size & pool_size = 2,
         const Size & step_size = 2);
-    static MaxoutLayer * load(const Yaml & config);
+    static MaxoutLayer * load(const KeyValue & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();
-    LayerInterface & backward_layer();
+    BackwardLayerInterface & backward_layer();
     const Tensor & output_node() const;
 
  private:

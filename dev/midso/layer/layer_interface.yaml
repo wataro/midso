@@ -9,7 +9,7 @@ method:
     - {type: const Tensor &, name: input_node}
 - propagate()
 - backward_layer():
-    return: LayerInterface &
+    return: BackwardLayerInterface &
 const method:
 - output_node():
     return: const Tensor &

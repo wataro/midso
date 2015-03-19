@@ -17,12 +17,12 @@ class BiasLayer : public LayerInterface, public ParametricInterface {
  public:
     BiasLayer() {}
     ~BiasLayer() {}
-    static BiasLayer * load(const Yaml & config);
+    static BiasLayer * load(const KeyValue & config);
     void init(const Tensor & input_node);
     void propagate(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();
-    LayerInterface & backward_layer();
+    BackwardLayerInterface & backward_layer();
     void update_parameter(const Tensor & diff);
     const Tensor & parameter() const;
     const Tensor & output_node() const;

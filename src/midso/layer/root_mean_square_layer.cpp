@@ -9,6 +9,25 @@
 
 namespace midso {
 
+static RootMeanSquareLayer * RootMeanSquareLayer::load(const KeyValue & config) {
+}
 
+void RootMeanSquareLayer::init(const Tensor & input_node) {
+}
+
+void RootMeanSquareLayer::propagate(const Tensor & input_node) {
+}
+
+void RootMeanSquareLayer::set_input(const Tensor & input_node) {
+}
+
+void RootMeanSquareLayer::propagate() {
+}
+
+BackwardLayerInterface & RootMeanSquareLayer::backward_layer() {
+}
+
+const Tensor & RootMeanSquareLayer::output_node() const {
+}
 
 }  // namespace midso

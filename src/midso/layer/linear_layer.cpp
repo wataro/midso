@@ -13,7 +13,7 @@ LinearLayer::LinearLayer(const Float & mul,
         const Float & add) {
 }
 
-static LinearLayer * LinearLayer::load(const Yaml & config) {
+static LinearLayer * LinearLayer::load(const KeyValue & config) {
 }
 
 void LinearLayer::init(const Tensor & input_node) {
@@ -25,7 +25,7 @@ void LinearLayer::set_input(const Tensor & input_node) {
 void LinearLayer::propagate() {
 }
 
-LayerInterface & LinearLayer::backward_layer() {
+BackwardLayerInterface & LinearLayer::backward_layer() {
 }
 
 const Tensor & LinearLayer::output_node() const {

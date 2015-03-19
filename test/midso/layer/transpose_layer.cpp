@@ -9,3 +9,21 @@
 #include "midso/transpose_layer.h"
 
 
+
+TEST(TransposeLayer, load) {
+}
+
+TEST(TransposeLayer, set_input) {
+}
+
+TEST(TransposeLayer, output_node) {
+}
+
+TEST(TransposeLayer, propagate) {
+}
+
+TEST(TransposeLayer, backward_layer) {
+}
+
+TEST(TransposeLayer, init) {
+}

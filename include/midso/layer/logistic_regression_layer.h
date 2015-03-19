@@ -18,11 +18,11 @@ class LogisticRegressionLayer : public LayerInterface, public ParametricInterfac
     LogisticRegressionLayer() {}
     ~LogisticRegressionLayer() {}
     LogisticRegressionLayer(const Size & n_outs);
-    static LogisticRegressionLayer * load(const Yaml & config);
+    static LogisticRegressionLayer * load(const KeyValue & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();
-    LayerInterface & backward_layer();
+    BackwardLayerInterface & backward_layer();
     void update_parameter(const Tensor & diff);
     const Tensor & parameter() const;
     const Tensor & output_node() const;

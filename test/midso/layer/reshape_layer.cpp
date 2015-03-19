@@ -9,3 +9,21 @@
 #include "midso/reshape_layer.h"
 
 
+
+TEST(ReshapeLayer, set_input) {
+}
+
+TEST(ReshapeLayer, propagate) {
+}
+
+TEST(ReshapeLayer, init) {
+}
+
+TEST(ReshapeLayer, output_node) {
+}
+
+TEST(ReshapeLayer, load) {
+}
+
+TEST(ReshapeLayer, backward_layer) {
+}

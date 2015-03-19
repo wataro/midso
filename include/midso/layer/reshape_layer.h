@@ -8,15 +8,24 @@
 #ifndef INCLUDE_MIDSO_LAYER_RESHAPE_LAYER_H_
 #define INCLUDE_MIDSO_LAYER_RESHAPE_LAYER_H_
 #include "midso/common.h"
-
+#include "midso/layer/layer_interface.h"
 
 namespace midso {
 
-class ReshapeLayer {
+class ReshapeLayer : public LayerInterface {
  public:
     ReshapeLayer() {}
     ~ReshapeLayer() {}
-
+    ReshapeLayer(const Size & n_maps,
+        const Size & n_rows,
+        const Size & n_cols);
+    static ReshapeLayer * load(const KeyValue & config);
+    void init(const Tensor & input_node);
+    void propagate(const Tensor & input_node);
+    void set_input(const Tensor & input_node);
+    void propagate();
+    BackwardLayerInterface & backward_layer();
+    const Tensor & output_node() const;
 
  private:
     DISALLOW_COPY_AND_ASSIGN(ReshapeLayer);
