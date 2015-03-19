@@ -31,3 +31,8 @@ file(GLOB ${PROJECT_NAME}_SRC_FILES test_digraph.cpp ../gtest-all.cc ../gtest_ma
 cuda_add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SRC_FILES})
 target_link_libraries(${PROJECT_NAME} pthread)
 
+project(sandbox_tensor)
+include_directories(..)
+file(GLOB ${PROJECT_NAME}_SRC_FILES test_tensor.cpp ../gtest-all.cc ../gtest_main.cc)
+cuda_add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_SRC_FILES})
+target_link_libraries(${PROJECT_NAME} pthread)
