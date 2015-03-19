@@ -5,7 +5,7 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#include "midso/core/random.h"
+#include "random.h"
 
 namespace midso {
 

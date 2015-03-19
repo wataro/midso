@@ -9,11 +9,11 @@
 
 namespace midso {
 
-void MaxOutLayer::MaxoutLayer(const Size & pool_size,
+MaxOutLayer::MaxOutLayer(const Size & pool_size,
         const Size & step_size) {
 }
 
-static MaxoutLayer * MaxOutLayer::load(const KeyValue & config) {
+MaxOutLayer * MaxOutLayer::load(const KeyValue & config) {
 }
 
 void MaxOutLayer::init(const Tensor & input_node) {

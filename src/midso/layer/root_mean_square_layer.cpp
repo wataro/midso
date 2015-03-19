@@ -9,7 +9,7 @@
 
 namespace midso {
 
-static RootMeanSquareLayer * RootMeanSquareLayer::load(const KeyValue & config) {
+RootMeanSquareLayer * RootMeanSquareLayer::load(const KeyValue & config) {
 }
 
 void RootMeanSquareLayer::init(const Tensor & input_node) {

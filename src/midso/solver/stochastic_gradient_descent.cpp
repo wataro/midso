@@ -12,7 +12,7 @@ namespace midso {
 StochasticGradientDescent::StochasticGradientDescent(Network & network) {
 }
 
-static StochasticGradientDescent * StochasticGradientDescent::load(const Yaml & config) {
+StochasticGradientDescent * StochasticGradientDescent::load(const Yaml & config) {
 }
 
 void StochasticGradientDescent::solve() {

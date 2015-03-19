@@ -12,7 +12,7 @@ namespace midso {
 Adadelta::Adadelta(Network & network) {
 }
 
-static Adadelta * Adadelta::load(const Yaml & config) {
+Adadelta * Adadelta::load(const Yaml & config) {
 }
 
 void Adadelta::solve() {

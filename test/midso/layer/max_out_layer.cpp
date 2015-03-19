@@ -8,19 +8,18 @@
 #include "gtest/gtest.h"
 #include "midso/max_out_layer.h"
 
+
+
 TEST(MaxOutLayer, output_node) {
 }
 
 TEST(MaxOutLayer, init) {
 }
 
-TEST(MaxOutLayer, MaxoutLayer) {
+TEST(MaxOutLayer, load) {
 }
 
 TEST(MaxOutLayer, backward_layer) {
-}
-
-TEST(MaxOutLayer, load) {
 }
 
 TEST(MaxOutLayer, set_input) {

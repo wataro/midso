@@ -14,7 +14,7 @@ ReshapeLayer::ReshapeLayer(const Size & n_maps,
         const Size & n_cols) {
 }
 
-static ReshapeLayer * ReshapeLayer::load(const KeyValue & config) {
+ReshapeLayer * ReshapeLayer::load(const KeyValue & config) {
 }
 
 void ReshapeLayer::init(const Tensor & input_node) {

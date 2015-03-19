@@ -9,7 +9,7 @@
 
 namespace midso {
 
-static TanhLayer * TanhLayer::load(const KeyValue & config) {
+TanhLayer * TanhLayer::load(const KeyValue & config) {
 }
 
 void TanhLayer::init(const Tensor & input_node) {

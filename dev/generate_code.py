@@ -305,6 +305,8 @@ def get_function_define(func_dict, classname, formatter):
     rettype = get_rettype(func_dict, classname)
     if rettype.startswith('virtual '):
         rettype = rettype[len('virtual '):]
+    if rettype.startswith('static '):
+        rettype = rettype[len('static '):]
     name = get_method_name(func_dict)
     args = get_args(func_dict)
     return formatter.format(**locals()).strip()

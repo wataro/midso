@@ -9,7 +9,7 @@
 
 namespace midso {
 
-static BiasLayer * BiasLayer::load(const KeyValue & config) {
+BiasLayer * BiasLayer::load(const KeyValue & config) {
 }
 
 void BiasLayer::init(const Tensor & input_node) {

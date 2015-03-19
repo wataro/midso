@@ -17,7 +17,7 @@ LocallyConnectedLayer::LocallyConnectedLayer(const Size & n_maps,
         const Size & n_steps_col) {
 }
 
-static LocallyConnectedLayer * LocallyConnectedLayer::load(const KeyValue & config) {
+LocallyConnectedLayer * LocallyConnectedLayer::load(const KeyValue & config) {
 }
 
 void LocallyConnectedLayer::init(const Tensor & input_node) {

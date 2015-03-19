@@ -5,19 +5,19 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#ifndef INCLUDE_MIDSO_LAYER_DROPOUT_LAYER_H_
-#define INCLUDE_MIDSO_LAYER_DROPOUT_LAYER_H_
+#ifndef INCLUDE_MIDSO_LAYER_DROP_OUT_LAYER_H_
+#define INCLUDE_MIDSO_LAYER_DROP_OUT_LAYER_H_
 #include "midso/common.h"
 #include "midso/layer/layer_interface.h"
 
 namespace midso {
 
-class DropoutLayer : public LayerInterface {
+class DropOutLayer : public LayerInterface {
  public:
-    DropoutLayer() {}
-    ~DropoutLayer() {}
-    DropoutLayer(const Float & drop_rate = 0.5);
-    static DropoutLayer * load(const KeyValue & config);
+    DropOutLayer() {}
+    ~DropOutLayer() {}
+    DropOutLayer(const Float & drop_rate = 0.5);
+    static DropOutLayer * load(const KeyValue & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();
@@ -25,9 +25,9 @@ class DropoutLayer : public LayerInterface {
     const Tensor & output_node() const;
 
  private:
-    DISALLOW_COPY_AND_ASSIGN(DropoutLayer);
+    DISALLOW_COPY_AND_ASSIGN(DropOutLayer);
 };
 
 }  // namespace midso
 
-#endif  // INCLUDE_MIDSO_LAYER_DROPOUT_LAYER_H_
+#endif  // INCLUDE_MIDSO_LAYER_DROP_OUT_LAYER_H_

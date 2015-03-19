@@ -5,7 +5,7 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#include "midso/core/tensor.h"
+#include "tensor.h"
 
 namespace midso {
 

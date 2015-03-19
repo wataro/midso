@@ -14,7 +14,7 @@ TransposeLayer::TransposeLayer(const Int & i_map,
         const Int & i_col) {
 }
 
-static TransposeLayer * TransposeLayer::load(const KeyValue & config) {
+TransposeLayer * TransposeLayer::load(const KeyValue & config) {
 }
 
 void TransposeLayer::init(const Tensor & input_node) {
@@ -26,7 +26,7 @@ void TransposeLayer::set_input(const Tensor & input_node) {
 void TransposeLayer::propagate() {
 }
 
-LayerInterface & TransposeLayer::backward_layer() {
+BackwardLayerInterface & TransposeLayer::backward_layer() {
 }
 
 const Tensor & TransposeLayer::output_node() const {

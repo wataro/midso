@@ -13,7 +13,7 @@ LinearLayer::LinearLayer(const Float & mul,
         const Float & add) {
 }
 
-static LinearLayer * LinearLayer::load(const KeyValue & config) {
+LinearLayer * LinearLayer::load(const KeyValue & config) {
 }
 
 void LinearLayer::init(const Tensor & input_node) {

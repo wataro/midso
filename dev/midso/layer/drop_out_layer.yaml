@@ -3,11 +3,11 @@
 superclass:
 - dev/midso/layer/layer_interface
 method:
-- DropoutLayer():
+- DropOutLayer():
     args:
     - {type: const Float &, name: drop_rate, default: 0.5}
 - load():
-    return: static DropoutLayer *
+    return: static DropOutLayer *
     args:
     - {type: const KeyValue &, name: config}
 - init():

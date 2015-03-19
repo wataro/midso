@@ -12,7 +12,7 @@ namespace midso {
 Rmsprop::Rmsprop(Network & network) {
 }
 
-static Rmsprop * Rmsprop::load(const Yaml & config) {
+Rmsprop * Rmsprop::load(const Yaml & config) {
 }
 
 void Rmsprop::solve() {

@@ -5,7 +5,7 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#include "midso/core/memory.h"
+#include "memory.h"
 
 namespace midso {
 

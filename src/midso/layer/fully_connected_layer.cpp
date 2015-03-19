@@ -12,7 +12,7 @@ namespace midso {
 FullyConnectedLayer::FullyConnectedLayer(const Size & n_outs) {
 }
 
-static FullyConnectedLayer * FullyConnectedLayer::load(const KeyValue & config) {
+FullyConnectedLayer * FullyConnectedLayer::load(const KeyValue & config) {
 }
 
 void FullyConnectedLayer::init(const Tensor & input_node) {

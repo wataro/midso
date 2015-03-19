@@ -5,7 +5,7 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#include "midso/core/yaml.h"
+#include "yaml.h"
 
 namespace midso {
 

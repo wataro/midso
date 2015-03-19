@@ -3,12 +3,12 @@
 superclass:
 - dev/midso/layer/layer_interface
 method:
-- MaxoutLayer():
+- MaxOutLayer():
     args:
     - {type: const Size &, name: pool_size, default: 2}
     - {type: const Size &, name: step_size, default: 2}
 - load():
-    return: static MaxoutLayer *
+    return: static MaxOutLayer *
     args:
     - {type: const KeyValue &, name: config}
 - init():

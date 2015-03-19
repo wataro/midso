@@ -9,7 +9,7 @@
 
 namespace midso {
 
-static SigmoidLayer * SigmoidLayer::load(const KeyValue & config) {
+SigmoidLayer * SigmoidLayer::load(const KeyValue & config) {
 }
 
 void SigmoidLayer::init(const Tensor & input_node) {
