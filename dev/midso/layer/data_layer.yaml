@@ -1,0 +1,26 @@
+%YAML 1.1
+---
+superclass:
+- dev/midso/layer/layer_interface
+method:
+- DataLayer():
+    args:
+    - {type: const String &, name: file_name}
+    - {type: const String &, name: data_name}
+- load():
+    return: static DataLayer *
+    args:
+    - {type: const KeyValueTree &, name: config}
+- init():
+    args:
+    - {type: const Tensor &, name: input_node}
+- set_input():
+    args:
+    - {type: const Tensor &, name: input_node}
+- propagate()
+- backward_layer():
+    return: BackwardLayerInterface &
+const method:
+- output_node():
+    return: const Tensor &
+
