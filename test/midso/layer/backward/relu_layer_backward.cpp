@@ -5,10 +5,7 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#include "midso/layer/backward/re_l_u_layer_backward.h"
-
-namespace midso {
-
+#include "gtest/gtest.h"
+#include "midso/relu_layer_backward.h"
 
 
-}  // namespace midso
