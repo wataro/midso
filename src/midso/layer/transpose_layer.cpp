@@ -14,7 +14,7 @@ TransposeLayer::TransposeLayer(const Int & i_map,
         const Int & i_col) {
 }
 
-TransposeLayer * TransposeLayer::load(const KeyValue & config) {
+TransposeLayer * TransposeLayer::load(const KeyValueTree & config) {
 }
 
 void TransposeLayer::init(const Tensor & input_node) {

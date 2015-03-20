@@ -16,7 +16,7 @@ class TanhLayer : public LayerInterface {
  public:
     TanhLayer() {}
     ~TanhLayer() {}
-    static TanhLayer * load(const KeyValue & config);
+    static TanhLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

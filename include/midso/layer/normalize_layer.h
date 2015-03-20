@@ -16,7 +16,7 @@ class NormalizeLayer : public LayerInterface {
  public:
     NormalizeLayer() {}
     ~NormalizeLayer() {}
-    static NormalizeLayer * load(const KeyValue & config);
+    static NormalizeLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void propagate(const Tensor & input_node);
     void set_input(const Tensor & input_node);

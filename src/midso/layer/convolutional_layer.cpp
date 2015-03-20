@@ -17,7 +17,7 @@ ConvolutionalLayer::ConvolutionalLayer(const Size & n_maps,
         const Size & n_steps_col) {
 }
 
-ConvolutionalLayer * ConvolutionalLayer::load(const KeyValue & config) {
+ConvolutionalLayer * ConvolutionalLayer::load(const KeyValueTree & config) {
 }
 
 void ConvolutionalLayer::init(const Tensor & input_node) {

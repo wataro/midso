@@ -16,7 +16,7 @@ class RootMeanSquareLayer : public LayerInterface {
  public:
     RootMeanSquareLayer() {}
     ~RootMeanSquareLayer() {}
-    static RootMeanSquareLayer * load(const KeyValue & config);
+    static RootMeanSquareLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void propagate(const Tensor & input_node);
     void set_input(const Tensor & input_node);

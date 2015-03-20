@@ -11,7 +11,7 @@ method:
 - load():
     return: static TransposeLayer *
     args:
-    - {type: const KeyValue &, name: config}
+    - {type: const KeyValueTree &, name: config}
 - init():
     args:
     - {type: const Tensor &, name: input_node}

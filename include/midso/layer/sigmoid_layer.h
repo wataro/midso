@@ -16,7 +16,7 @@ class SigmoidLayer : public LayerInterface {
  public:
     SigmoidLayer() {}
     ~SigmoidLayer() {}
-    static SigmoidLayer * load(const KeyValue & config);
+    static SigmoidLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

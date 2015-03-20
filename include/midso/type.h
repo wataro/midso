@@ -21,8 +21,9 @@ typedef int Int;
 typedef float Float;
 
 class BackwardLayerInterface;
-class KeyValue;
+class KeyValueTree;
 class Network;
+class SolverInterface;
 class Tensor;
 class Yaml;
 

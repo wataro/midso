@@ -19,7 +19,7 @@ class TransposeLayer : public LayerInterface {
     TransposeLayer(const Int & i_map,
         const Int & i_row,
         const Int & i_col);
-    static TransposeLayer * load(const KeyValue & config);
+    static TransposeLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

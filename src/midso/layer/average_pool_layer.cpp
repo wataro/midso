@@ -17,7 +17,7 @@ AveragePoolLayer::AveragePoolLayer(const Size & n_maps,
         const Size & n_steps_col) {
 }
 
-AveragePoolLayer * AveragePoolLayer::load(const KeyValue & config) {
+AveragePoolLayer * AveragePoolLayer::load(const KeyValueTree & config) {
 }
 
 void AveragePoolLayer::init(const Tensor & input_node) {

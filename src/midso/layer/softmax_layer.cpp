@@ -9,7 +9,7 @@
 
 namespace midso {
 
-SoftmaxLayer * SoftmaxLayer::load(const KeyValue & config) {
+SoftmaxLayer * SoftmaxLayer::load(const KeyValueTree & config) {
 }
 
 void SoftmaxLayer::init(const Tensor & input_node) {

@@ -19,7 +19,7 @@ class ReshapeLayer : public LayerInterface {
     ReshapeLayer(const Size & n_maps,
         const Size & n_rows,
         const Size & n_cols);
-    static ReshapeLayer * load(const KeyValue & config);
+    static ReshapeLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void propagate(const Tensor & input_node);
     void set_input(const Tensor & input_node);

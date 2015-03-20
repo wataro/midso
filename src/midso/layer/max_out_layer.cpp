@@ -13,7 +13,7 @@ MaxOutLayer::MaxOutLayer(const Size & pool_size,
         const Size & step_size) {
 }
 
-MaxOutLayer * MaxOutLayer::load(const KeyValue & config) {
+MaxOutLayer * MaxOutLayer::load(const KeyValueTree & config) {
 }
 
 void MaxOutLayer::init(const Tensor & input_node) {

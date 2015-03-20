@@ -8,15 +8,16 @@
 #ifndef INCLUDE_MIDSO_RUNNER_TEST_RUNNER_H_
 #define INCLUDE_MIDSO_RUNNER_TEST_RUNNER_H_
 #include "midso/common.h"
-
+#include "midso/runner/runner_interface.h"
 
 namespace midso {
 
-class TestRunner {
+class TestRunner : public RunnerInterface {
  public:
     TestRunner() {}
     ~TestRunner() {}
-
+    TestRunner(const Network & network);
+    void run();
 
  private:
     DISALLOW_COPY_AND_ASSIGN(TestRunner);

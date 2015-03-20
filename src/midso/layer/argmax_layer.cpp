@@ -9,7 +9,7 @@
 
 namespace midso {
 
-ArgmaxLayer * ArgmaxLayer::load(const KeyValue & config) {
+ArgmaxLayer * ArgmaxLayer::load(const KeyValueTree & config) {
 }
 
 void ArgmaxLayer::init(const Tensor & input_node) {

@@ -5,7 +5,7 @@ superclass:
 method:
 - TrainRunner():
     args:
-    - {type: const Yaml &, name: config}
+    - {type: const SolverInterface &, name: solver}
     - {type: const Network &, name: network}
 - run()
 

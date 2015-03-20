@@ -22,7 +22,7 @@ class AveragePoolLayer : public LayerInterface {
         const Size & n_steps_map = 1,
         const Size & n_steps_row = 1,
         const Size & n_steps_col = 1);
-    static AveragePoolLayer * load(const KeyValue & config);
+    static AveragePoolLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

@@ -9,7 +9,7 @@
 
 namespace midso {
 
-ReluLayer * ReluLayer::load(const KeyValue & config) {
+ReluLayer * ReluLayer::load(const KeyValueTree & config) {
 }
 
 void ReluLayer::init(const Tensor & input_node) {

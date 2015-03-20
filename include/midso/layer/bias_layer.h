@@ -17,7 +17,7 @@ class BiasLayer : public LayerInterface, public ParametricInterface {
  public:
     BiasLayer() {}
     ~BiasLayer() {}
-    static BiasLayer * load(const KeyValue & config);
+    static BiasLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void propagate(const Tensor & input_node);
     void set_input(const Tensor & input_node);

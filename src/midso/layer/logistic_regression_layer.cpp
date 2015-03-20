@@ -12,7 +12,7 @@ namespace midso {
 LogisticRegressionLayer::LogisticRegressionLayer(const Size & n_outs) {
 }
 
-LogisticRegressionLayer * LogisticRegressionLayer::load(const KeyValue & config) {
+LogisticRegressionLayer * LogisticRegressionLayer::load(const KeyValueTree & config) {
 }
 
 void LogisticRegressionLayer::init(const Tensor & input_node) {

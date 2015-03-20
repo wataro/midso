@@ -16,7 +16,7 @@ class ArgmaxLayer : public LayerInterface {
  public:
     ArgmaxLayer() {}
     ~ArgmaxLayer() {}
-    static ArgmaxLayer * load(const KeyValue & config);
+    static ArgmaxLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

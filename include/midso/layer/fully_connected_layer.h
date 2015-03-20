@@ -18,7 +18,7 @@ class FullyConnectedLayer : public LayerInterface, public ParametricInterface {
     FullyConnectedLayer() {}
     ~FullyConnectedLayer() {}
     FullyConnectedLayer(const Size & n_outs);
-    static FullyConnectedLayer * load(const KeyValue & config);
+    static FullyConnectedLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

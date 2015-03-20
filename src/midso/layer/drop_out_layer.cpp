@@ -12,7 +12,7 @@ namespace midso {
 DropOutLayer::DropOutLayer(const Float & drop_rate) {
 }
 
-DropOutLayer * DropOutLayer::load(const KeyValue & config) {
+DropOutLayer * DropOutLayer::load(const KeyValueTree & config) {
 }
 
 void DropOutLayer::init(const Tensor & input_node) {

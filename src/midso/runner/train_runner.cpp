@@ -9,7 +9,7 @@
 
 namespace midso {
 
-TrainRunner::TrainRunner(const Yaml & config,
+TrainRunner::TrainRunner(const SolverInterface & solver,
         const Network & network) {
 }
 

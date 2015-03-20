@@ -18,7 +18,7 @@ class MaxOutLayer : public LayerInterface {
     ~MaxOutLayer() {}
     MaxOutLayer(const Size & pool_size = 2,
         const Size & step_size = 2);
-    static MaxOutLayer * load(const KeyValue & config);
+    static MaxOutLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

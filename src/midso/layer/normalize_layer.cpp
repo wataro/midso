@@ -9,7 +9,7 @@
 
 namespace midso {
 
-NormalizeLayer * NormalizeLayer::load(const KeyValue & config) {
+NormalizeLayer * NormalizeLayer::load(const KeyValueTree & config) {
 }
 
 void NormalizeLayer::init(const Tensor & input_node) {

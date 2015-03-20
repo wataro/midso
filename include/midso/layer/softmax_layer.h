@@ -16,7 +16,7 @@ class SoftmaxLayer : public LayerInterface {
  public:
     SoftmaxLayer() {}
     ~SoftmaxLayer() {}
-    static SoftmaxLayer * load(const KeyValue & config);
+    static SoftmaxLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

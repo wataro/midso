@@ -5,8 +5,8 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#ifndef INCLUDE_MIDSO_CORE_YAML_H_
-#define INCLUDE_MIDSO_CORE_YAML_H_
+#ifndef SRC_MIDSO_CORE_YAML_H_
+#define SRC_MIDSO_CORE_YAML_H_
 #include "midso/common.h"
 
 
@@ -24,4 +24,4 @@ class Yaml {
 
 }  // namespace midso
 
-#endif  // INCLUDE_MIDSO_CORE_YAML_H_
+#endif  // SRC_MIDSO_CORE_YAML_H_

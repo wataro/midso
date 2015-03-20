@@ -18,7 +18,7 @@ class LinearLayer : public LayerInterface {
     ~LinearLayer() {}
     LinearLayer(const Float & mul = 1.0,
         const Float & add = 0.0);
-    static LinearLayer * load(const KeyValue & config);
+    static LinearLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

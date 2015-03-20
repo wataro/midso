@@ -17,7 +17,7 @@ class DropOutLayer : public LayerInterface {
     DropOutLayer() {}
     ~DropOutLayer() {}
     DropOutLayer(const Float & drop_rate = 0.5);
-    static DropOutLayer * load(const KeyValue & config);
+    static DropOutLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

@@ -16,7 +16,7 @@ class ReluLayer : public LayerInterface {
  public:
     ReluLayer() {}
     ~ReluLayer() {}
-    static ReluLayer * load(const KeyValue & config);
+    static ReluLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

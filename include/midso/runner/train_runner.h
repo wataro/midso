@@ -16,7 +16,7 @@ class TrainRunner : public RunnerInterface {
  public:
     TrainRunner() {}
     ~TrainRunner() {}
-    TrainRunner(const Yaml & config,
+    TrainRunner(const SolverInterface & solver,
         const Network & network);
     void run();
 

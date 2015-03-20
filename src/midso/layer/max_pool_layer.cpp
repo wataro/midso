@@ -15,7 +15,7 @@ MaxPoolLayer::MaxPoolLayer(const Size & pool_size_row,
         const Size & step_size_col) {
 }
 
-MaxPoolLayer * MaxPoolLayer::load(const KeyValue & config) {
+MaxPoolLayer * MaxPoolLayer::load(const KeyValueTree & config) {
 }
 
 void MaxPoolLayer::init(const Tensor & input_node) {

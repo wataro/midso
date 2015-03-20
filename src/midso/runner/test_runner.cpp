@@ -9,6 +9,10 @@
 
 namespace midso {
 
+TestRunner::TestRunner(const Network & network) {
+}
 
+void TestRunner::run() {
+}
 
 }  // namespace midso

@@ -20,7 +20,7 @@ class MaxPoolLayer : public LayerInterface {
         const Size & pool_size_col = 2,
         const Size & step_size_row = 2,
         const Size & step_size_col = 2);
-    static MaxPoolLayer * load(const KeyValue & config);
+    static MaxPoolLayer * load(const KeyValueTree & config);
     void init(const Tensor & input_node);
     void set_input(const Tensor & input_node);
     void propagate();

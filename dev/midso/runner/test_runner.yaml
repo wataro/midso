@@ -1,0 +1,10 @@
+%YAML 1.1
+---
+superclass:
+- dev/midso/runner/runner_interface.yaml
+method:
+- TestRunner():
+    args:
+    - {type: const Network &, name: network}
+- run()
+
