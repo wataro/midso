@@ -121,18 +121,23 @@ def get_class(basename):
 
 def get_include_guard(yaml_path):
     '''
-    >>> get_include_guard('include/midso/layer_interface.yaml')
+    >>> get_include_guard('dev/midso/core/key_value_tree.yaml')
+    'SRC_MIDSO_CORE_KEY_VALUE_TREE_H_'
+    >>> get_include_guard('dev/midso/include/midso/layer_interface.yaml')
     'INCLUDE_MIDSO_LAYER_INTERFACE_H_'
-    >>> get_include_guard('include/midso/layer/linear_layer.yaml')
+    >>> get_include_guard('dev/midso/include/midso/layer/linear_layer.yaml')
     'INCLUDE_MIDSO_LAYER_LINEAR_LAYER_H_'
-    >>> get_include_guard('include/midso/layer/backward/linear_layer_backward.yaml')
+    >>> get_include_guard('dev/midso/include/midso/layer/backward/linear_layer_backward.yaml')
     'INCLUDE_MIDSO_LAYER_BACKWARD_LINEAR_LAYER_BACKWARD_H_'
     '''
     basename = get_basename(yaml_path).upper()
     pathto = get_pathto(yaml_path)
     pathto = '_'.join(pathto.split('/'))
     pathto = pathto.upper()
-    return 'INCLUDE_MIDSO_{}{}_H_'.format(pathto, basename)
+    if '/core/' in yaml_path:
+        return 'SRC_MIDSO_{}{}_H_'.format(pathto, basename)
+    else:
+        return 'INCLUDE_MIDSO_{}{}_H_'.format(pathto, basename)
 
 
 def get_superclass(yaml_contents):
@@ -365,7 +370,10 @@ def save_header_file(args):
     pathto = get_pathto(yaml_path)
     contents = get_header_contents(yaml_path)
     basename = get_basename(yaml_path)
-    file_path = path.join('include', 'midso', pathto, '{}.h'.format(basename))
+    if '/core/' in args.yaml_path:
+        file_path = path.join('src', 'midso', pathto, '{}.h'.format(basename))
+    else:
+        file_path = path.join('include', 'midso', pathto, '{}.h'.format(basename))
     if path.exists(file_path) and not args.overwrite:
         print 'ERROR: {} exists. If you want to overwrite it, use -f option.'.format(file_path)
         return
