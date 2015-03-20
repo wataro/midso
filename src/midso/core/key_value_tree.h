@@ -5,23 +5,23 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#ifndef INCLUDE_MIDSO_CORE_KEY_VALUE_H_
-#define INCLUDE_MIDSO_CORE_KEY_VALUE_H_
+#ifndef SRC_MIDSO_CORE_KEY_VALUE_TREE_H_
+#define SRC_MIDSO_CORE_KEY_VALUE_TREE_H_
 #include "midso/common.h"
 
 
 namespace midso {
 
-class KeyValue {
+class KeyValueTree {
  public:
-    KeyValue() {}
-    ~KeyValue() {}
+    KeyValueTree() {}
+    ~KeyValueTree() {}
 
 
  private:
-    DISALLOW_COPY_AND_ASSIGN(KeyValue);
+    DISALLOW_COPY_AND_ASSIGN(KeyValueTree);
 };
 
 }  // namespace midso
 
-#endif  // INCLUDE_MIDSO_CORE_KEY_VALUE_H_
+#endif  // SRC_MIDSO_CORE_KEY_VALUE_TREE_H_
