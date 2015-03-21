@@ -17,6 +17,7 @@ using Pointer = std::unique_ptr<T>;
 
 typedef std::size_t Size;
 typedef std::string String;
+typedef unsigned char Byte;
 typedef int Int;
 typedef float Float;
 
