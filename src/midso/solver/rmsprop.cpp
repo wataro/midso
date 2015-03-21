@@ -12,10 +12,13 @@ namespace midso {
 Rmsprop::Rmsprop(Network & network) {
 }
 
-Rmsprop * Rmsprop::load(const Yaml & config) {
+Rmsprop * Rmsprop::load(const KeyValueTree & config) {
 }
 
-void Rmsprop::solve() {
+bool Rmsprop::need_update() {
+}
+
+void Rmsprop::update_once() {
 }
 
 }  // namespace midso

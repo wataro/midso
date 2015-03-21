@@ -10,8 +10,11 @@
 
 
 
-TEST(Adadelta, solve) {
+TEST(Adadelta, need_update) {
 }
 
 TEST(Adadelta, load) {
+}
+
+TEST(Adadelta, update_once) {
 }

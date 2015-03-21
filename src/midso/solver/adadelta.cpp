@@ -12,10 +12,13 @@ namespace midso {
 Adadelta::Adadelta(Network & network) {
 }
 
-Adadelta * Adadelta::load(const Yaml & config) {
+Adadelta * Adadelta::load(const KeyValueTree & config) {
 }
 
-void Adadelta::solve() {
+bool Adadelta::need_update() {
+}
+
+void Adadelta::update_once() {
 }
 
 }  // namespace midso

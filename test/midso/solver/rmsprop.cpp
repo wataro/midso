@@ -10,8 +10,11 @@
 
 
 
-TEST(Rmsprop, solve) {
+TEST(Rmsprop, update_once) {
 }
 
 TEST(Rmsprop, load) {
+}
+
+TEST(Rmsprop, need_update) {
 }

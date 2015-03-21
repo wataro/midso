@@ -13,5 +13,8 @@
 TEST(StochasticGradientDescent, load) {
 }
 
-TEST(StochasticGradientDescent, solve) {
+TEST(StochasticGradientDescent, update_once) {
+}
+
+TEST(StochasticGradientDescent, need_update) {
 }

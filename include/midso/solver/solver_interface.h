@@ -16,7 +16,8 @@ class SolverInterface {
  public:
     virtual ~SolverInterface() {}
 
-    virtual void solve() = 0;
+    virtual bool need_update() = 0;
+    virtual void update_once() = 0;
 };
 
 }  // namespace midso

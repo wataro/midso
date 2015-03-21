@@ -5,8 +5,8 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#ifndef INCLUDE_MIDSO_CORE_MEMORY_H_
-#define INCLUDE_MIDSO_CORE_MEMORY_H_
+#ifndef SRC_MIDSO_CORE_MEMORY_H_
+#define SRC_MIDSO_CORE_MEMORY_H_
 #include "midso/common.h"
 
 
@@ -16,7 +16,8 @@ class Memory {
  public:
     Memory() {}
     ~Memory() {}
-
+    void reserve(const Size & n_bytes);
+    Pointer<Byte> allocate();
 
  private:
     DISALLOW_COPY_AND_ASSIGN(Memory);
@@ -24,4 +25,4 @@ class Memory {
 
 }  // namespace midso
 
-#endif  // INCLUDE_MIDSO_CORE_MEMORY_H_
+#endif  // SRC_MIDSO_CORE_MEMORY_H_

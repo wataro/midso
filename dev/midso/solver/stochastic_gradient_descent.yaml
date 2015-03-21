@@ -1,5 +1,7 @@
 %YAML 1.1
 ---
+superclass:
+- dev/midso/solver/solver_interface.yaml
 method:
 - StochasticGradientDescent():
     args:
@@ -7,6 +9,8 @@ method:
 - load():
     return: static StochasticGradientDescent *
     args:
-    - {type: const Yaml &, name: config}
-- solve()
+    - {type: const KeyValueTree &, name: config}
+- need_update():
+    return: bool
+- update_once()
 

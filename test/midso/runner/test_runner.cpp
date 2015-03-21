@@ -9,3 +9,6 @@
 #include "midso/test_runner.h"
 
 
+
+TEST(TestRunner, run) {
+}

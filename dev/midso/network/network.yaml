@@ -1,0 +1,18 @@
+%YAML 1.1
+---
+method:
+- load():
+    return: static Network *
+    args:
+    - {type: const KeyValueTree &, name: config}
+- init()
+- propagate()
+- build_backward_network()
+- get_backward_network():
+    return: Network &
+- get_parameters():
+    return: Vector<Tensor> &
+const method:
+- get_output():
+    return: const Tensor &
+

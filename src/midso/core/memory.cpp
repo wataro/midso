@@ -5,10 +5,14 @@
 
     http://opensource.org/licenses/mit-license.php
 */
-#include "memory.h"
+#include "midso/core/memory.h"
 
 namespace midso {
 
+void Memory::reserve(const Size & n_bytes) {
+}
 
+Pointer<Byte> Memory::allocate() {
+}
 
 }  // namespace midso

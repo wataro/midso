@@ -16,7 +16,13 @@ class Network {
  public:
     Network() {}
     ~Network() {}
-
+    static Network * load(const KeyValueTree & config);
+    void init();
+    void propagate();
+    void build_backward_network();
+    Network & get_backward_network();
+    Vector<Tensor> & get_parameters();
+    const Tensor & get_output() const;
 
  private:
     DISALLOW_COPY_AND_ASSIGN(Network);

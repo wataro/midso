@@ -8,4 +8,8 @@
 #include "gtest/gtest.h"
 #include "midso/memory.h"
 
+TEST(Memory, reserve) {
+}
 
+TEST(Memory, allocate) {
+}

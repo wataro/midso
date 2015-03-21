@@ -12,10 +12,13 @@ namespace midso {
 StochasticGradientDescent::StochasticGradientDescent(Network & network) {
 }
 
-StochasticGradientDescent * StochasticGradientDescent::load(const Yaml & config) {
+StochasticGradientDescent * StochasticGradientDescent::load(const KeyValueTree & config) {
 }
 
-void StochasticGradientDescent::solve() {
+bool StochasticGradientDescent::need_update() {
+}
+
+void StochasticGradientDescent::update_once() {
 }
 
 }  // namespace midso
