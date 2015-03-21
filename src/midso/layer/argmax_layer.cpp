@@ -12,10 +12,10 @@ namespace midso {
 ArgmaxLayer * ArgmaxLayer::load(const KeyValueTree & config) {
 }
 
-void ArgmaxLayer::init(const Tensor & input_node) {
+void ArgmaxLayer::init(const Tensor & in_tensor) {
 }
 
-void ArgmaxLayer::set_input(const Tensor & input_node) {
+void ArgmaxLayer::set_input(const Tensor & in_tensor) {
 }
 
 void ArgmaxLayer::propagate() {
@@ -24,7 +24,7 @@ void ArgmaxLayer::propagate() {
 BackwardLayerInterface & ArgmaxLayer::backward_layer() {
 }
 
-const Tensor & ArgmaxLayer::output_node() const {
+const Tensor & ArgmaxLayer::get_output() const {
 }
 
 }  // namespace midso

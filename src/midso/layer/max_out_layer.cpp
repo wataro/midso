@@ -16,10 +16,10 @@ MaxOutLayer::MaxOutLayer(const Size & pool_size,
 MaxOutLayer * MaxOutLayer::load(const KeyValueTree & config) {
 }
 
-void MaxOutLayer::init(const Tensor & input_node) {
+void MaxOutLayer::init(const Tensor & in_tensor) {
 }
 
-void MaxOutLayer::set_input(const Tensor & input_node) {
+void MaxOutLayer::set_input(const Tensor & in_tensor) {
 }
 
 void MaxOutLayer::propagate() {
@@ -28,7 +28,7 @@ void MaxOutLayer::propagate() {
 BackwardLayerInterface & MaxOutLayer::backward_layer() {
 }
 
-const Tensor & MaxOutLayer::output_node() const {
+const Tensor & MaxOutLayer::get_output() const {
 }
 
 }  // namespace midso

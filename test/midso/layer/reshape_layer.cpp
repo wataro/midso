@@ -19,7 +19,7 @@ TEST(ReshapeLayer, propagate) {
 TEST(ReshapeLayer, init) {
 }
 
-TEST(ReshapeLayer, output_node) {
+TEST(ReshapeLayer, get_output) {
 }
 
 TEST(ReshapeLayer, load) {

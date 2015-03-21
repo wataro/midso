@@ -15,10 +15,10 @@ DropOutLayer::DropOutLayer(const Float & drop_rate) {
 DropOutLayer * DropOutLayer::load(const KeyValueTree & config) {
 }
 
-void DropOutLayer::init(const Tensor & input_node) {
+void DropOutLayer::init(const Tensor & in_tensor) {
 }
 
-void DropOutLayer::set_input(const Tensor & input_node) {
+void DropOutLayer::set_input(const Tensor & in_tensor) {
 }
 
 void DropOutLayer::propagate() {
@@ -27,7 +27,7 @@ void DropOutLayer::propagate() {
 BackwardLayerInterface & DropOutLayer::backward_layer() {
 }
 
-const Tensor & DropOutLayer::output_node() const {
+const Tensor & DropOutLayer::get_output() const {
 }
 
 }  // namespace midso

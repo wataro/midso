@@ -12,13 +12,13 @@ namespace midso {
 NormalizeLayer * NormalizeLayer::load(const KeyValueTree & config) {
 }
 
-void NormalizeLayer::init(const Tensor & input_node) {
+void NormalizeLayer::init(const Tensor & in_tensor) {
 }
 
-void NormalizeLayer::propagate(const Tensor & input_node) {
+void NormalizeLayer::propagate(const Tensor & in_tensor) {
 }
 
-void NormalizeLayer::set_input(const Tensor & input_node) {
+void NormalizeLayer::set_input(const Tensor & in_tensor) {
 }
 
 void NormalizeLayer::propagate() {
@@ -27,7 +27,7 @@ void NormalizeLayer::propagate() {
 BackwardLayerInterface & NormalizeLayer::backward_layer() {
 }
 
-const Tensor & NormalizeLayer::output_node() const {
+const Tensor & NormalizeLayer::get_output() const {
 }
 
 }  // namespace midso

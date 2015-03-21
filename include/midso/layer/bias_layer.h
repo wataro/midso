@@ -18,14 +18,14 @@ class BiasLayer : public LayerInterface, public ParametricInterface {
     BiasLayer() {}
     ~BiasLayer() {}
     static BiasLayer * load(const KeyValueTree & config);
-    void init(const Tensor & input_node);
-    void propagate(const Tensor & input_node);
-    void set_input(const Tensor & input_node);
+    void init(const Tensor & in_tensor);
+    void propagate(const Tensor & in_tensor);
+    void set_input(const Tensor & in_tensor);
     void propagate();
     BackwardLayerInterface & backward_layer();
     void update_parameter(const Tensor & diff);
     const Tensor & parameter() const;
-    const Tensor & output_node() const;
+    const Tensor & get_output() const;
 
  private:
     DISALLOW_COPY_AND_ASSIGN(BiasLayer);

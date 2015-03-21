@@ -12,10 +12,10 @@ namespace midso {
 SigmoidLayer * SigmoidLayer::load(const KeyValueTree & config) {
 }
 
-void SigmoidLayer::init(const Tensor & input_node) {
+void SigmoidLayer::init(const Tensor & in_tensor) {
 }
 
-void SigmoidLayer::set_input(const Tensor & input_node) {
+void SigmoidLayer::set_input(const Tensor & in_tensor) {
 }
 
 void SigmoidLayer::propagate() {
@@ -24,7 +24,7 @@ void SigmoidLayer::propagate() {
 BackwardLayerInterface & SigmoidLayer::backward_layer() {
 }
 
-const Tensor & SigmoidLayer::output_node() const {
+const Tensor & SigmoidLayer::get_output() const {
 }
 
 }  // namespace midso

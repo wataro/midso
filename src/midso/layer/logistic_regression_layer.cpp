@@ -15,10 +15,10 @@ LogisticRegressionLayer::LogisticRegressionLayer(const Size & n_outs) {
 LogisticRegressionLayer * LogisticRegressionLayer::load(const KeyValueTree & config) {
 }
 
-void LogisticRegressionLayer::init(const Tensor & input_node) {
+void LogisticRegressionLayer::init(const Tensor & in_tensor) {
 }
 
-void LogisticRegressionLayer::set_input(const Tensor & input_node) {
+void LogisticRegressionLayer::set_input(const Tensor & in_tensor) {
 }
 
 void LogisticRegressionLayer::propagate() {
@@ -33,7 +33,7 @@ void LogisticRegressionLayer::update_parameter(const Tensor & diff) {
 const Tensor & LogisticRegressionLayer::parameter() const {
 }
 
-const Tensor & LogisticRegressionLayer::output_node() const {
+const Tensor & LogisticRegressionLayer::get_output() const {
 }
 
 }  // namespace midso

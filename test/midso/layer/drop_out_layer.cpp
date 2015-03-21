@@ -13,10 +13,10 @@
 TEST(DropOutLayer, load) {
 }
 
-TEST(DropOutLayer, set_input) {
+TEST(DropOutLayer, get_output) {
 }
 
-TEST(DropOutLayer, output_node) {
+TEST(DropOutLayer, set_input) {
 }
 
 TEST(DropOutLayer, backward_layer) {

@@ -12,13 +12,13 @@ namespace midso {
 BiasLayer * BiasLayer::load(const KeyValueTree & config) {
 }
 
-void BiasLayer::init(const Tensor & input_node) {
+void BiasLayer::init(const Tensor & in_tensor) {
 }
 
-void BiasLayer::propagate(const Tensor & input_node) {
+void BiasLayer::propagate(const Tensor & in_tensor) {
 }
 
-void BiasLayer::set_input(const Tensor & input_node) {
+void BiasLayer::set_input(const Tensor & in_tensor) {
 }
 
 void BiasLayer::propagate() {
@@ -33,7 +33,7 @@ void BiasLayer::update_parameter(const Tensor & diff) {
 const Tensor & BiasLayer::parameter() const {
 }
 
-const Tensor & BiasLayer::output_node() const {
+const Tensor & BiasLayer::get_output() const {
 }
 
 }  // namespace midso

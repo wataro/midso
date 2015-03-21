@@ -10,10 +10,10 @@
 
 
 
-TEST(LogisticRegressionLayer, load) {
+TEST(LogisticRegressionLayer, get_output) {
 }
 
-TEST(LogisticRegressionLayer, output_node) {
+TEST(LogisticRegressionLayer, load) {
 }
 
 TEST(LogisticRegressionLayer, parameter) {

@@ -12,10 +12,10 @@ namespace midso {
 TanhLayer * TanhLayer::load(const KeyValueTree & config) {
 }
 
-void TanhLayer::init(const Tensor & input_node) {
+void TanhLayer::init(const Tensor & in_tensor) {
 }
 
-void TanhLayer::set_input(const Tensor & input_node) {
+void TanhLayer::set_input(const Tensor & in_tensor) {
 }
 
 void TanhLayer::propagate() {
@@ -24,7 +24,7 @@ void TanhLayer::propagate() {
 BackwardLayerInterface & TanhLayer::backward_layer() {
 }
 
-const Tensor & TanhLayer::output_node() const {
+const Tensor & TanhLayer::get_output() const {
 }
 
 }  // namespace midso

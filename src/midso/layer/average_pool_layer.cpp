@@ -20,10 +20,10 @@ AveragePoolLayer::AveragePoolLayer(const Size & n_maps,
 AveragePoolLayer * AveragePoolLayer::load(const KeyValueTree & config) {
 }
 
-void AveragePoolLayer::init(const Tensor & input_node) {
+void AveragePoolLayer::init(const Tensor & in_tensor) {
 }
 
-void AveragePoolLayer::set_input(const Tensor & input_node) {
+void AveragePoolLayer::set_input(const Tensor & in_tensor) {
 }
 
 void AveragePoolLayer::propagate() {
@@ -32,7 +32,7 @@ void AveragePoolLayer::propagate() {
 BackwardLayerInterface & AveragePoolLayer::backward_layer() {
 }
 
-const Tensor & AveragePoolLayer::output_node() const {
+const Tensor & AveragePoolLayer::get_output() const {
 }
 
 }  // namespace midso

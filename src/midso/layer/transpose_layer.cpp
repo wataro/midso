@@ -17,10 +17,10 @@ TransposeLayer::TransposeLayer(const Int & i_map,
 TransposeLayer * TransposeLayer::load(const KeyValueTree & config) {
 }
 
-void TransposeLayer::init(const Tensor & input_node) {
+void TransposeLayer::init(const Tensor & in_tensor) {
 }
 
-void TransposeLayer::set_input(const Tensor & input_node) {
+void TransposeLayer::set_input(const Tensor & in_tensor) {
 }
 
 void TransposeLayer::propagate() {
@@ -29,7 +29,7 @@ void TransposeLayer::propagate() {
 BackwardLayerInterface & TransposeLayer::backward_layer() {
 }
 
-const Tensor & TransposeLayer::output_node() const {
+const Tensor & TransposeLayer::get_output() const {
 }
 
 }  // namespace midso

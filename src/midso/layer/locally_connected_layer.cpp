@@ -20,10 +20,10 @@ LocallyConnectedLayer::LocallyConnectedLayer(const Size & n_maps,
 LocallyConnectedLayer * LocallyConnectedLayer::load(const KeyValueTree & config) {
 }
 
-void LocallyConnectedLayer::init(const Tensor & input_node) {
+void LocallyConnectedLayer::init(const Tensor & in_tensor) {
 }
 
-void LocallyConnectedLayer::set_input(const Tensor & input_node) {
+void LocallyConnectedLayer::set_input(const Tensor & in_tensor) {
 }
 
 void LocallyConnectedLayer::propagate() {
@@ -38,7 +38,7 @@ void LocallyConnectedLayer::update_parameter(const Tensor & diff) {
 const Tensor & LocallyConnectedLayer::parameter() const {
 }
 
-const Tensor & LocallyConnectedLayer::output_node() const {
+const Tensor & LocallyConnectedLayer::get_output() const {
 }
 
 }  // namespace midso

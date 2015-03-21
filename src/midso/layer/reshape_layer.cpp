@@ -17,13 +17,13 @@ ReshapeLayer::ReshapeLayer(const Size & n_maps,
 ReshapeLayer * ReshapeLayer::load(const KeyValueTree & config) {
 }
 
-void ReshapeLayer::init(const Tensor & input_node) {
+void ReshapeLayer::init(const Tensor & in_tensor) {
 }
 
-void ReshapeLayer::propagate(const Tensor & input_node) {
+void ReshapeLayer::propagate(const Tensor & in_tensor) {
 }
 
-void ReshapeLayer::set_input(const Tensor & input_node) {
+void ReshapeLayer::set_input(const Tensor & in_tensor) {
 }
 
 void ReshapeLayer::propagate() {
@@ -32,7 +32,7 @@ void ReshapeLayer::propagate() {
 BackwardLayerInterface & ReshapeLayer::backward_layer() {
 }
 
-const Tensor & ReshapeLayer::output_node() const {
+const Tensor & ReshapeLayer::get_output() const {
 }
 
 }  // namespace midso

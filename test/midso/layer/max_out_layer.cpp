@@ -10,13 +10,13 @@
 
 
 
-TEST(MaxOutLayer, output_node) {
-}
-
 TEST(MaxOutLayer, init) {
 }
 
 TEST(MaxOutLayer, load) {
+}
+
+TEST(MaxOutLayer, get_output) {
 }
 
 TEST(MaxOutLayer, backward_layer) {

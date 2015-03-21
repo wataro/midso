@@ -13,7 +13,7 @@
 TEST(DataLayer, propagate) {
 }
 
-TEST(DataLayer, output_node) {
+TEST(DataLayer, get_output) {
 }
 
 TEST(DataLayer, set_input) {

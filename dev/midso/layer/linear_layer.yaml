@@ -13,14 +13,14 @@ method:
     - {type: const KeyValueTree &, name: config}
 - init():
     args:
-    - {type: const Tensor &, name: input_node}
+    - {type: const Tensor &, name: in_tensor}
 - set_input():
     args:
-    - {type: const Tensor &, name: input_node}
+    - {type: const Tensor &, name: in_tensor}
 - propagate()
 - backward_layer():
     return: BackwardLayerInterface &
 const method:
-- output_node():
+- get_output():
     return: const Tensor &
 

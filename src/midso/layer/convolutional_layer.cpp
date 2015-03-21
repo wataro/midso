@@ -20,10 +20,10 @@ ConvolutionalLayer::ConvolutionalLayer(const Size & n_maps,
 ConvolutionalLayer * ConvolutionalLayer::load(const KeyValueTree & config) {
 }
 
-void ConvolutionalLayer::init(const Tensor & input_node) {
+void ConvolutionalLayer::init(const Tensor & in_tensor) {
 }
 
-void ConvolutionalLayer::set_input(const Tensor & input_node) {
+void ConvolutionalLayer::set_input(const Tensor & in_tensor) {
 }
 
 void ConvolutionalLayer::propagate() {
@@ -38,7 +38,7 @@ void ConvolutionalLayer::update_parameter(const Tensor & diff) {
 const Tensor & ConvolutionalLayer::parameter() const {
 }
 
-const Tensor & ConvolutionalLayer::output_node() const {
+const Tensor & ConvolutionalLayer::get_output() const {
 }
 
 }  // namespace midso

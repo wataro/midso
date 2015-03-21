@@ -19,11 +19,11 @@ TEST(MaxPoolLayer, init) {
 TEST(MaxPoolLayer, backward_layer) {
 }
 
+TEST(MaxPoolLayer, get_output) {
+}
+
 TEST(MaxPoolLayer, load) {
 }
 
 TEST(MaxPoolLayer, set_input) {
-}
-
-TEST(MaxPoolLayer, output_node) {
 }

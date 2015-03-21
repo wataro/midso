@@ -8,13 +8,13 @@
 #include "gtest/gtest.h"
 #include "midso/root_mean_square_layer.h"
 
+TEST(RootMeanSquareLayer, get_output) {
+}
+
 TEST(RootMeanSquareLayer, set_input) {
 }
 
 TEST(RootMeanSquareLayer, propagate) {
-}
-
-TEST(RootMeanSquareLayer, output_node) {
 }
 
 TEST(RootMeanSquareLayer, init) {

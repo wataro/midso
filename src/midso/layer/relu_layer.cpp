@@ -12,10 +12,10 @@ namespace midso {
 ReluLayer * ReluLayer::load(const KeyValueTree & config) {
 }
 
-void ReluLayer::init(const Tensor & input_node) {
+void ReluLayer::init(const Tensor & in_tensor) {
 }
 
-void ReluLayer::set_input(const Tensor & input_node) {
+void ReluLayer::set_input(const Tensor & in_tensor) {
 }
 
 void ReluLayer::propagate() {
@@ -24,7 +24,7 @@ void ReluLayer::propagate() {
 BackwardLayerInterface & ReluLayer::backward_layer() {
 }
 
-const Tensor & ReluLayer::output_node() const {
+const Tensor & ReluLayer::get_output() const {
 }
 
 }  // namespace midso

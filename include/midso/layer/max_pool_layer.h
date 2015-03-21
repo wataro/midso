@@ -21,11 +21,11 @@ class MaxPoolLayer : public LayerInterface {
         const Size & step_size_row = 2,
         const Size & step_size_col = 2);
     static MaxPoolLayer * load(const KeyValueTree & config);
-    void init(const Tensor & input_node);
-    void set_input(const Tensor & input_node);
+    void init(const Tensor & in_tensor);
+    void set_input(const Tensor & in_tensor);
     void propagate();
     BackwardLayerInterface & backward_layer();
-    const Tensor & output_node() const;
+    const Tensor & get_output() const;
 
  private:
     DISALLOW_COPY_AND_ASSIGN(MaxPoolLayer);

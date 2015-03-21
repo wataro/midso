@@ -12,10 +12,10 @@ namespace midso {
 SoftmaxLayer * SoftmaxLayer::load(const KeyValueTree & config) {
 }
 
-void SoftmaxLayer::init(const Tensor & input_node) {
+void SoftmaxLayer::init(const Tensor & in_tensor) {
 }
 
-void SoftmaxLayer::set_input(const Tensor & input_node) {
+void SoftmaxLayer::set_input(const Tensor & in_tensor) {
 }
 
 void SoftmaxLayer::propagate() {
@@ -24,7 +24,7 @@ void SoftmaxLayer::propagate() {
 BackwardLayerInterface & SoftmaxLayer::backward_layer() {
 }
 
-const Tensor & SoftmaxLayer::output_node() const {
+const Tensor & SoftmaxLayer::get_output() const {
 }
 
 }  // namespace midso

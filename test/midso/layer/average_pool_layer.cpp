@@ -10,20 +10,20 @@
 
 
 
-TEST(AveragePoolLayer, output_node) {
-}
-
 TEST(AveragePoolLayer, backward_layer) {
 }
 
 TEST(AveragePoolLayer, set_input) {
 }
 
-TEST(AveragePoolLayer, init) {
+TEST(AveragePoolLayer, get_output) {
 }
 
 TEST(AveragePoolLayer, load) {
 }
 
 TEST(AveragePoolLayer, propagate) {
+}
+
+TEST(AveragePoolLayer, init) {
 }

@@ -13,10 +13,10 @@
 TEST(LinearLayer, load) {
 }
 
-TEST(LinearLayer, init) {
+TEST(LinearLayer, get_output) {
 }
 
-TEST(LinearLayer, output_node) {
+TEST(LinearLayer, init) {
 }
 
 TEST(LinearLayer, propagate) {

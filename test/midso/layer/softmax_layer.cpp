@@ -8,6 +8,9 @@
 #include "gtest/gtest.h"
 #include "midso/softmax_layer.h"
 
+TEST(SoftmaxLayer, get_output) {
+}
+
 TEST(SoftmaxLayer, load) {
 }
 
@@ -21,7 +24,4 @@ TEST(SoftmaxLayer, propagate) {
 }
 
 TEST(SoftmaxLayer, init) {
-}
-
-TEST(SoftmaxLayer, output_node) {
 }

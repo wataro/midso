@@ -13,13 +13,13 @@
 TEST(LocallyConnectedLayer, init) {
 }
 
-TEST(LocallyConnectedLayer, output_node) {
-}
-
 TEST(LocallyConnectedLayer, propagate) {
 }
 
 TEST(LocallyConnectedLayer, update_parameter) {
+}
+
+TEST(LocallyConnectedLayer, get_output) {
 }
 
 TEST(LocallyConnectedLayer, set_input) {

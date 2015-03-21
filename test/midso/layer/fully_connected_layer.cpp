@@ -13,7 +13,7 @@
 TEST(FullyConnectedLayer, init) {
 }
 
-TEST(FullyConnectedLayer, output_node) {
+TEST(FullyConnectedLayer, get_output) {
 }
 
 TEST(FullyConnectedLayer, update_parameter) {

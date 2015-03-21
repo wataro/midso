@@ -13,10 +13,10 @@
 TEST(TransposeLayer, load) {
 }
 
-TEST(TransposeLayer, set_input) {
+TEST(TransposeLayer, init) {
 }
 
-TEST(TransposeLayer, output_node) {
+TEST(TransposeLayer, set_input) {
 }
 
 TEST(TransposeLayer, propagate) {
@@ -25,5 +25,5 @@ TEST(TransposeLayer, propagate) {
 TEST(TransposeLayer, backward_layer) {
 }
 
-TEST(TransposeLayer, init) {
+TEST(TransposeLayer, get_output) {
 }

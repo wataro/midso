@@ -15,10 +15,10 @@ FullyConnectedLayer::FullyConnectedLayer(const Size & n_outs) {
 FullyConnectedLayer * FullyConnectedLayer::load(const KeyValueTree & config) {
 }
 
-void FullyConnectedLayer::init(const Tensor & input_node) {
+void FullyConnectedLayer::init(const Tensor & in_tensor) {
 }
 
-void FullyConnectedLayer::set_input(const Tensor & input_node) {
+void FullyConnectedLayer::set_input(const Tensor & in_tensor) {
 }
 
 void FullyConnectedLayer::propagate() {
@@ -33,7 +33,7 @@ void FullyConnectedLayer::update_parameter(const Tensor & diff) {
 const Tensor & FullyConnectedLayer::parameter() const {
 }
 
-const Tensor & FullyConnectedLayer::output_node() const {
+const Tensor & FullyConnectedLayer::get_output() const {
 }
 
 }  // namespace midso

@@ -14,13 +14,13 @@ TEST(BiasLayer, init) {
 TEST(BiasLayer, set_input) {
 }
 
-TEST(BiasLayer, output_node) {
-}
-
 TEST(BiasLayer, propagate) {
 }
 
 TEST(BiasLayer, parameter) {
+}
+
+TEST(BiasLayer, get_output) {
 }
 
 TEST(BiasLayer, load) {

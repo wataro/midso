@@ -23,5 +23,5 @@ TEST(ArgmaxLayer, init) {
 TEST(ArgmaxLayer, backward_layer) {
 }
 
-TEST(ArgmaxLayer, output_node) {
+TEST(ArgmaxLayer, get_output) {
 }

@@ -17,7 +17,7 @@ TEST(ReluLayer, backward_layer) {
 TEST(ReluLayer, set_input) {
 }
 
-TEST(ReluLayer, output_node) {
+TEST(ReluLayer, get_output) {
 }
 
 TEST(ReluLayer, propagate) {

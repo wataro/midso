@@ -19,9 +19,6 @@ TEST(ConvolutionalLayer, init) {
 TEST(ConvolutionalLayer, set_input) {
 }
 
-TEST(ConvolutionalLayer, output_node) {
-}
-
 TEST(ConvolutionalLayer, propagate) {
 }
 
@@ -29,6 +26,9 @@ TEST(ConvolutionalLayer, update_parameter) {
 }
 
 TEST(ConvolutionalLayer, load) {
+}
+
+TEST(ConvolutionalLayer, get_output) {
 }
 
 TEST(ConvolutionalLayer, parameter) {

@@ -16,11 +16,11 @@ class LayerInterface {
  public:
     virtual ~LayerInterface() {}
 
-    virtual void init(const Tensor & input_node) = 0;
-    virtual void set_input(const Tensor & input_node) = 0;
+    virtual void init(const Tensor & in_tensor) = 0;
+    virtual void set_input(const Tensor & in_tensor) = 0;
     virtual void propagate() = 0;
     virtual BackwardLayerInterface & backward_layer() = 0;
-    virtual const Tensor &  output_node() const = 0;
+    virtual const Tensor &  get_output() const = 0;
 };
 
 }  // namespace midso

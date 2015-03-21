@@ -16,10 +16,10 @@ LinearLayer::LinearLayer(const Float & mul,
 LinearLayer * LinearLayer::load(const KeyValueTree & config) {
 }
 
-void LinearLayer::init(const Tensor & input_node) {
+void LinearLayer::init(const Tensor & in_tensor) {
 }
 
-void LinearLayer::set_input(const Tensor & input_node) {
+void LinearLayer::set_input(const Tensor & in_tensor) {
 }
 
 void LinearLayer::propagate() {
@@ -28,7 +28,7 @@ void LinearLayer::propagate() {
 BackwardLayerInterface & LinearLayer::backward_layer() {
 }
 
-const Tensor & LinearLayer::output_node() const {
+const Tensor & LinearLayer::get_output() const {
 }
 
 }  // namespace midso

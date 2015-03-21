@@ -8,13 +8,13 @@
 #include "gtest/gtest.h"
 #include "midso/normalize_layer.h"
 
+TEST(NormalizeLayer, set_input) {
+}
+
 TEST(NormalizeLayer, init) {
 }
 
-TEST(NormalizeLayer, output_node) {
-}
-
-TEST(NormalizeLayer, set_input) {
+TEST(NormalizeLayer, get_output) {
 }
 
 TEST(NormalizeLayer, backward_layer) {
