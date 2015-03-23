@@ -15,7 +15,7 @@ Network * Network::load(const KeyValueTree & config) {
 void Network::init() {
 }
 
-void Network::propagate() {
+void Network::propagate(const Size & n_samples) {
 }
 
 void Network::build_backward_network() {

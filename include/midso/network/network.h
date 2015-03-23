@@ -18,7 +18,7 @@ class Network {
     ~Network() {}
     static Network * load(const KeyValueTree & config);
     void init();
-    void propagate();
+    void propagate(const Size & n_samples);
     void build_backward_network();
     Network & get_backward_network();
     Vector<Tensor> & get_parameters();

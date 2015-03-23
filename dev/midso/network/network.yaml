@@ -6,7 +6,9 @@ method:
     args:
     - {type: const KeyValueTree &, name: config}
 - init()
-- propagate()
+- propagate():
+    args:
+    - {type: const Size &, name: n_samples}
 - build_backward_network()
 - get_backward_network():
     return: Network &
