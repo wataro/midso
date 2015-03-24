@@ -47,13 +47,13 @@ struct Vertex_
 };
 
 template<typename T_>
-class Digraph
+class Graph
 {
     public:
-    typedef T_* Item;
+    typedef T_ Item;
     typedef Pair<Item, Item> Arc;
     typedef Vertex_<Item> Vertex;
-    Digraph(Vector<Arc> & arcs) : arcs_(arcs)
+    Graph(Vector<Arc> & arcs) : arcs_(arcs)
     {
         this->build_dependencies();
     }
@@ -102,7 +102,7 @@ TEST(SANDBOX, DIGRAPH)
      *              +-- [3] ---------+
      * */
     Layer<char> layers[] = {'0', '1', '2', '3', '4', '5'};
-    Digraph<Layer<char>>::Arc arc_array[] = {
+    Graph<Layer<char>*>::Arc arc_array[] = {
         std::make_pair(layers + 0, layers + 1),
         std::make_pair(layers + 1, layers + 2),
         std::make_pair(layers + 1, layers + 3),
@@ -110,22 +110,22 @@ TEST(SANDBOX, DIGRAPH)
         std::make_pair(layers + 3, layers + 5),
         std::make_pair(layers + 4, layers + 5),
     };
-    Vector<typename Digraph<Layer<char>>::Arc> arcs;
+    Vector<typename Graph<Layer<char>*>::Arc> arcs;
     arcs.push_back(arc_array[0]);
     arcs.push_back(arc_array[1]);
     arcs.push_back(arc_array[2]);
     arcs.push_back(arc_array[3]);
     arcs.push_back(arc_array[4]);
     arcs.push_back(arc_array[5]);
-    Digraph<Layer<char>> digraph(arcs);
+    Graph<Layer<char>*> digraph(arcs);
     for(auto vertex: digraph.vertices()) {
         for(auto depend: vertex.depends_) {
             vertex.key_->set_input(depend->output());
         }
         vertex.key_->propagate();
     }
-    arcs = Digraph<Layer<char>>::reversed_arcs(arcs);
-    Digraph<Layer<char>> digraph_rev(arcs);
+    arcs = Graph<Layer<char>*>::reversed_arcs(arcs);
+    Graph<Layer<char>*> digraph_rev(arcs);
     for(auto vertex: digraph_rev.vertices()) {
         for(auto depend: vertex.depends_) {
             vertex.key_->set_input(depend->output());
