@@ -16,7 +16,8 @@ class RunnerFactory {
  public:
     RunnerFactory() {}
     ~RunnerFactory() {}
-
+    static SharedPointer<RunnerInterface> create(const int argc,
+        const char ** argv);
 
  private:
     DISALLOW_COPY_AND_ASSIGN(RunnerFactory);

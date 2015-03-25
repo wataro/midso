@@ -12,7 +12,7 @@ namespace midso {
 void Memory::reserve(const Size & n_bytes) {
 }
 
-Pointer<Byte> Memory::allocate() {
+SharedPointer<Byte> Memory::allocate() {
 }
 
 }  // namespace midso

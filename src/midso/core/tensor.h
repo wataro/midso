@@ -24,7 +24,7 @@ class Tensor {
         const Size & index5 = 0,
         const Size & index6 = 0,
         const Size & index7 = 0);
-    Pointer<Float> ptr();
+    SharedPointer<Float> ptr();
     const Float & at(const Size & index0 = 0,
         const Size & index1 = 0,
         const Size & index2 = 0,
@@ -33,7 +33,7 @@ class Tensor {
         const Size & index5 = 0,
         const Size & index6 = 0,
         const Size & index7 = 0) const;
-    const Pointer<Float> ptr() const;
+    const SharedPointer<Float> ptr() const;
     void copy_to(Tensor & dst) const;
 
  private:

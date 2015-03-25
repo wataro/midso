@@ -8,4 +8,5 @@
 #include "gtest/gtest.h"
 #include "midso/runner_factory.h"
 
-
+TEST(RunnerFactory, create) {
+}

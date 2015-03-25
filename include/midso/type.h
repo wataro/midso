@@ -13,7 +13,10 @@ template<typename T>
 using Vector = std::vector<T>;
 
 template<typename T>
-using Pointer = std::unique_ptr<T>;
+using UniquePointer = std::unique_ptr<T>;
+
+template<typename T>
+using SharedPointer = std::shared_ptr<T>;
 
 typedef std::size_t Size;
 typedef std::string String;
@@ -24,6 +27,8 @@ typedef float Float;
 class BackwardLayerInterface;
 class KeyValueTree;
 class Network;
+class RunnerFactory;
+class RunnerInterface;
 class SolverInterface;
 class Tensor;
 class Yaml;

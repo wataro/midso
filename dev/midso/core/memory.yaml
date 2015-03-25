@@ -5,5 +5,5 @@ method:
     args:
     - {type: const Size &, name: n_bytes}
 - allocate():
-    return: Pointer<Byte>
+    return: SharedPointer<Byte>
 

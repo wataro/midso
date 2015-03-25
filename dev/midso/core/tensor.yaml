@@ -13,7 +13,7 @@ const method:
     - {type: 'const Size &', name: index6, default: 0}
     - {type: 'const Size &', name: index7, default: 0}
 - ptr():
-    return: 'const Pointer<Float>'
+    return: 'const SharedPointer<Float>'
 - copy_to():
     args:
     - {type: 'Tensor &', name: dst}
@@ -30,5 +30,5 @@ method:
     - {type: 'const Size &', name: index6, default: 0}
     - {type: 'const Size &', name: index7, default: 0}
 - ptr():
-    return: 'Pointer<Float>'
+    return: 'SharedPointer<Float>'
 

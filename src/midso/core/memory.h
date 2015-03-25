@@ -17,7 +17,7 @@ class Memory {
     Memory() {}
     ~Memory() {}
     void reserve(const Size & n_bytes);
-    Pointer<Byte> allocate();
+    SharedPointer<Byte> allocate();
 
  private:
     DISALLOW_COPY_AND_ASSIGN(Memory);

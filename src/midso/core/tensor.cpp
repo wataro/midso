@@ -19,7 +19,7 @@ Float & Tensor::at(const Size & index0,
         const Size & index7) {
 }
 
-Pointer<Float> Tensor::ptr() {
+SharedPointer<Float> Tensor::ptr() {
 }
 
 const Float & Tensor::at(const Size & index0,
@@ -32,7 +32,7 @@ const Float & Tensor::at(const Size & index0,
         const Size & index7) const {
 }
 
-const Pointer<Float> Tensor::ptr() const {
+const SharedPointer<Float> Tensor::ptr() const {
 }
 
 void Tensor::copy_to(Tensor & dst) const {
