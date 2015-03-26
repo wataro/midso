@@ -8,14 +8,13 @@
 #include "midso/runner/runner_factory.h"
 #include <memory>
 #include "midso/runner/train_runner.h"
+#include "midso/core/key_value_tree.h"
 
 namespace midso {
 
-SharedPointer<RunnerInterface>
-RunnerFactory::create(
-    const int argc,
-    const char ** argv)
+SharedPointer<RunnerInterface> RunnerFactory::create(const Vector<String> args)
 {
+    KeyValueTree kvt(args);
     return std::make_shared<TrainRunner>();
 }
 

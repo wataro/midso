@@ -16,7 +16,7 @@ class KeyValueTree {
  public:
     KeyValueTree() {}
     ~KeyValueTree() {}
-
+    KeyValueTree(const Vector<String> & args);
 
  private:
     DISALLOW_COPY_AND_ASSIGN(KeyValueTree);

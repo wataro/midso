@@ -16,7 +16,9 @@ int main(const int argc, const char ** argv)
 {
     LOG(INFO) << "Make It Deep, Simple, Open!";
     SharedPointer<Vector<Int>> p_values;
-    auto runner = RunnerFactory::create(argc, argv);
+    const Vector<String> args(argv, argv + argc);
+    LOG(INFO) << args[0];
+    auto runner = RunnerFactory::create(args);
     runner->run();
 
     return 0;

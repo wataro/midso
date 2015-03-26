@@ -9,6 +9,7 @@
 
 namespace midso {
 
-
+KeyValueTree::KeyValueTree(const Vector<String> & args) {
+}
 
 }  // namespace midso

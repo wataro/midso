@@ -4,6 +4,5 @@ method:
 - create():
     return: static SharedPointer<RunnerInterface>
     args:
-    - {type: const int, name: argc}
-    - {type: const char **, name: argv}
+    - {type: const Vector<String>, name: args}
 
