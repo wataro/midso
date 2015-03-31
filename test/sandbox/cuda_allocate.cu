@@ -9,7 +9,7 @@
 
 void * allocate_cuda_memory(size_t size)
 {
-    void * p;
+    void * p = nullptr;
     cudaMalloc(&p, size);
     return p;
 }
